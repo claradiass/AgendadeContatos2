@@ -1,12 +1,6 @@
 package main.java.br.edu.ifpb.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
-
-import java.text.ParseException;
 
 
 import main.java.br.edu.ifpb.domain.Contato;

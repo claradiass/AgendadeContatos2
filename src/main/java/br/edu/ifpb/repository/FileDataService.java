@@ -5,8 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import main.java.br.edu.ifpb.domain.Contato;
 
@@ -52,19 +50,14 @@ public class FileDataService extends InMemoryDataService {
     }
     
 
-        // public Contato(String nome 0, String sobrenome 1, boolean ligacao 2, boolean chamadaVideo 3, String categoria 4, String valorDaEntrada 5, String redeSocial 6, String telefone 7, String aniversario,8) {
-
-
             private void write() {
                 try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE))) {
-                    // Escreve o cabeçalho
                     if ((CSV_FILE).length() == 0) {
-                        // Escreve o cabeçalho apenas se o arquivo estiver vazio
                         bw.write("Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario");
                         bw.newLine();
                     }
-            
-                    // Escreve os dados dos contatos
+
+
                     for (Contato contato : getAll()) {
                         String line = contato.getNome() + "," + contato.getSobrenome() + "," +
                                 contato.isLigacao() + "," + contato.isChamadaVideo() + "," +
@@ -81,3 +74,7 @@ public class FileDataService extends InMemoryDataService {
             }
             
 }
+
+
+
+
