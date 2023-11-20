@@ -2,6 +2,7 @@ package main.java.br.edu.ifpb.repository;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class FileDataService extends InMemoryDataService {
 
     private void read() {
         try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
+            // readline
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
@@ -51,23 +53,21 @@ public class FileDataService extends InMemoryDataService {
     
 
             private void write() {
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(CSV_FILE))) {
-                    if ((CSV_FILE).length() == 0) {
-                        bw.write("Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario");
-                        bw.newLine();
+                File file = new File(CSV_FILE);
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                    StringBuilder sb = new StringBuilder();
+                    if (file.length() == 0) {
+                        sb.append("Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario" + System.lineSeparator());
                     }
 
-
                     for (Contato contato : getAll()) {
-                        String line = contato.getNome() + "," + contato.getSobrenome() + "," +
+                        sb.append(contato.getNome() + "," + contato.getSobrenome() + "," +
                                 contato.isLigacao() + "," + contato.isChamadaVideo() + "," +
                                 contato.getCategoria() + "," + contato.getValorDaEntrada() + "," +
                                 contato.getRedeSocial() + "," + contato.getTelefone() + "," +
-                                contato.getAniversario();
-            
-                        bw.write(line);
-                        bw.newLine();
+                                contato.getAniversario() + System.lineSeparator());
                     }
+                    bw.write(sb.toString());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

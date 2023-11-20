@@ -19,5 +19,4 @@ public class OpcionalDateValidator implements Validator<String> {
         return false;
         }
     }
-  
 }
