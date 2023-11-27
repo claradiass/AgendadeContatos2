@@ -50,29 +50,27 @@ public class FileDataService extends InMemoryDataService {
             e.printStackTrace();
         }
     }
-    
 
-            private void write() {
-                File file = new File(CSV_FILE);
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-                    StringBuilder sb = new StringBuilder();
-                    if (file.length() == 0) {
-                        sb.append("Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario" + System.lineSeparator());
-                    }
-
-                    for (Contato contato : getAll()) {
-                        sb.append(contato.getNome() + "," + contato.getSobrenome() + "," +
-                                contato.isLigacao() + "," + contato.isChamadaVideo() + "," +
-                                contato.getCategoria() + "," + contato.getValorDaEntrada() + "," +
-                                contato.getRedeSocial() + "," + contato.getTelefone() + "," +
-                                contato.getAniversario() + System.lineSeparator());
-                    }
-                    bw.write(sb.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    private void write() {
+        File file = new File(CSV_FILE);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            StringBuilder sb = new StringBuilder();
+            if (file.length() == 0) {
+                sb.append("Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario" + System.lineSeparator());
             }
-            
+
+            for (Contato contato : getAll()) {
+                sb.append(contato.getNome() + "," + contato.getSobrenome() + "," +
+                        contato.isLigacao() + "," + contato.isChamadaVideo() + "," +
+                        contato.getCategoria() + "," + contato.getValorDaEntrada() + "," +
+                        contato.getRedeSocial() + "," + contato.getTelefone() + "," +
+                        contato.getAniversario() + System.lineSeparator());
+            }
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
