@@ -37,7 +37,14 @@ public class FileDataService extends InMemoryDataService {
         try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
             // readline
             String line;
+            boolean isFirstLine = true; // Adiciona uma variável para controlar se é a primeira linha
+    
             while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue; // Ignora a primeira linha (cabeçalho)
+                }
+    
                 String[] data = line.split(",");
                 if (data.length == 9) { // Verifica se há 9 campos
                     Contato contato = new Contato(data[0], data[1], Boolean.parseBoolean(data[2]), Boolean.parseBoolean(data[3]), data[4], data[5], data[6], data[7], data[8]);
@@ -50,6 +57,7 @@ public class FileDataService extends InMemoryDataService {
             e.printStackTrace();
         }
     }
+    
 
     private void write() {
         File file = new File(CSV_FILE);
