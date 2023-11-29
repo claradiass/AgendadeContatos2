@@ -51,7 +51,7 @@ public class AgendaDeContatosConsoleApplication {
                 case 5 -> executor.executeCommand(new BuscarContatoCommand());
                 case 6 -> executor.executeCommand(new ExcluirContatoCommand());
                 case 7 -> executor.executeCommand(new EditarContatoCommand());
-                case 8 -> System.out.println(RED + "Agenda de Contatos encerrada" + RESET);
+                case 8 -> System.out.println(RED + "Agenda de Contatos encerrada." + RESET);
                 default -> System.out.println("Opção inválida");
                 
             }

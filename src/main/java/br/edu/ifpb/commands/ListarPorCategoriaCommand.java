@@ -10,14 +10,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListarPorCategoriaCommand implements Command {
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[91m";
+
     @Override
     public void execute() {
         ContatoService contatoService = new ContatoService(ContatoRepository.getInstance());
         List<Contato> contatos = contatoService.getContatos();
 
         System.out.println("\n-------------------------------");
-        System.out.println("Listar contatos por Categoria\n");
-        System.out.println("\n-------------------------------");
+        System.out.println("Listar contatos por Categoria");
+        System.out.println("-------------------------------\n");
         System.out.println("[1] - Favoritos \n[2] - Pessoal \n[3] - Trabalho");
 
         ValidationContext<Integer> intValidationContext = new ValidationContext<>(new IntervalValidator(1, 3));
@@ -27,6 +30,12 @@ public class ListarPorCategoriaCommand implements Command {
         List<Contato> contatosFiltrados = contatos.stream()
                 .filter(c -> c.getCategoria().equalsIgnoreCase(getCategoriaFromChoice(escolhaCategoria)))
                 .collect(Collectors.toList());
+
+        if(contatosFiltrados.isEmpty()){
+            System.out.println(RED + "\nNão existe contatos cadastrados nessa categoria." + RESET);
+        }
+        
+        System.out.println("\nResultado:\n");
 
         System.out.println(contatosFiltrados);
     }

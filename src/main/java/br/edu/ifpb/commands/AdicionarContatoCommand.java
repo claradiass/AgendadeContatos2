@@ -15,7 +15,7 @@ public class AdicionarContatoCommand implements Command {
 
         System.out.println("\n-----------------------------------");
         System.out.println("Adicionar um novo contato");
-        System.out.println("-----------------------------------");
+        System.out.println("-----------------------------------\n");
 
         ValidationContext<String> strValidationContext = new ValidationContext<>(new NonEmptyValidator());
         ValidationContext<Integer> intValidationContext = new ValidationContext<>(new IntervalValidator(1, 4));
