@@ -22,9 +22,8 @@ public class BuscarContatoCommand implements Command{
         System.out.println("Buscar contatos");        
         System.out.println("-------------------------------\n");
 
-        System.out.print("Digite parte do nome para buscar: ");
+        
         ValidationContext<String> strValidationContext = new ValidationContext<>(new NonEmptyValidator());
-
         String nome = strValidationContext.getValidValue("Digite parte do nome para buscar: ", "Termo de busca não pode ser vazio", String.class);
         List<Contato> resultado = contatoService.buscar(nome);
 

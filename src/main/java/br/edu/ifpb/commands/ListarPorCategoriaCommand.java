@@ -35,6 +35,7 @@ public class ListarPorCategoriaCommand implements Command {
             System.out.println(RED + "\nNão existe contatos cadastrados nessa categoria." + RESET);
         }
         
+        System.out.println("\nResultado:\n");
 
         System.out.println(contatosFiltrados);
     }

@@ -35,6 +35,8 @@ public class ListarContatosPorRedeCommand implements Command {
             System.out.println(RED + "\nNão existe contatos cadastrados nessa rede social." + RESET);
         }
 
+        System.out.println("\nResultado:\n");
+
         System.out.println(contatosFiltrados);
     }
 
