@@ -21,10 +21,9 @@ public class EditarContatoCommand implements Command{
   public void execute() {
     ContatoService contatoService = new ContatoService(ContatoRepository.getInstance());
 
-        System.out.println("\n=================================");
+        System.out.println("\n-------------------------------");
         System.out.println("Editar contato");
-        System.out.println("=================================\n");
-        System.out.println("Busque um contato para editar\n");
+        System.out.println("-------------------------------\n");
 
         ValidationContext<String> strValidationContext = new ValidationContext<>(new NonEmptyValidator());
         String termo = strValidationContext.getValidValue("Digite parte do nome para buscar: ", "Termo de busca não pode ser vazio", String.class);

@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListarPorCategoriaCommand implements Command {
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[91m";
+
     @Override
     public void execute() {
         ContatoService contatoService = new ContatoService(ContatoRepository.getInstance());
@@ -27,6 +30,11 @@ public class ListarPorCategoriaCommand implements Command {
         List<Contato> contatosFiltrados = contatos.stream()
                 .filter(c -> c.getCategoria().equalsIgnoreCase(getCategoriaFromChoice(escolhaCategoria)))
                 .collect(Collectors.toList());
+
+        if(contatosFiltrados.isEmpty()){
+            System.out.println(RED + "\nNão existe contatos cadastrados nessa categoria." + RESET);
+        }
+        
 
         System.out.println(contatosFiltrados);
     }

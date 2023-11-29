@@ -1,5 +1,2 @@
 Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario
-Ana,Clara,true,true,Favoritos,,WhatsApp,(99)12345-1234,12/12/1212
-Ed,asd,true,true,Favoritos,,WhatsApp,(99)23454-4321,12/12/2345
-fgh,asdf,true,true,Pessoal,,WhatsApp,(88)76543-2435,09/09/0987
-
+Maria,Eduarda,false,false,Pessoal,eduarda@gmail.com,Email,(83)99141-5847,18/08/2004

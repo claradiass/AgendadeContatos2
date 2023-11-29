@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListarContatosPorRedeCommand implements Command {
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[91m";
+
     @Override
     public void execute() {
         ContatoService contatoService = new ContatoService(ContatoRepository.getInstance());
@@ -22,11 +25,15 @@ public class ListarContatosPorRedeCommand implements Command {
 
         ValidationContext<Integer> intValidationContext = new ValidationContext<>(new IntervalValidator(1, 3));
         int escolhaRedeSocial = intValidationContext.getValidValue("Escolha a opção desejada: ",
-                "Escolha inválida, escolha entre 1 e 4 (inclusivo)", Integer.class);
+                "Escolha inválida, escolha entre 1 e 3 (inclusivo)", Integer.class);
 
         List<Contato> contatosFiltrados = contatos.stream()
                 .filter(c -> c.getRedeSocial().equalsIgnoreCase(getRedeSocialFromChoice(escolhaRedeSocial)))
                 .collect(Collectors.toList());
+
+        if(contatosFiltrados.isEmpty()){
+            System.out.println(RED + "\nNão existe contatos cadastrados nessa rede social." + RESET);
+        }
 
         System.out.println(contatosFiltrados);
     }
