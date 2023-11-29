@@ -10,15 +10,6 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 
 public class ContatoWindow {
-    private final JTextField nome;
-    private final JTextField sobrenome;
-    private final JTextField ligacao;
-    private final JTextField chamadaVideo;
-    private final JTextField categoria;
-    private final JTextField valorDaEntrada;
-    private final JTextField redeSocial;
-    private final JTextField telefone;
-    private final JTextField aniversario;
     private final JFrame frame;
 
     public ContatoWindow(MainWindow main, Contato contato){
@@ -28,7 +19,12 @@ public class ContatoWindow {
         JLabel labelNome = new JLabel("Nome:");
         JLabel labelData = new JLabel("Data de nascimento:");
 
-        txtNome = new JTextField();
-        txtData = new JTextField();
+    }
+
+    public void show() {
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

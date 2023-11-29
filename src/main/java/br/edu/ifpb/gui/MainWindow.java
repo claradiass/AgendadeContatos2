@@ -374,6 +374,8 @@ public class MainWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 300));
@@ -387,7 +389,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(33, 50, 78));
-        jTextField1.setText("Buscar contato");
+        jTextField1.setText(" ");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -411,12 +413,40 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(33, 50, 78));
-        jLabel2.setText("Adicionar em:");
+        jLabel2.setText("Adicionar novo contato");
 
         jButton2.setBackground(new java.awt.Color(33, 50, 78));
         jButton2.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Editar");
+
+        jButton3.setBackground(new java.awt.Color(33, 50, 78));
+        // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("mais1.png"))); // NOI18N
+        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Adicionar");
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setPreferredSize(new java.awt.Dimension(300, 40));
+        jButton3.addActionListener(e -> {
+            // PacienteWindow pode ser aberta para criação ou edição de um paciente
+            // Se paciente for nulo, a janela funcionará para criar um novo
+            // Caso contrário, carregará os dados para editar
+            new ContatoWindow(this, null).show();
+        });
+
+        //JtextFieldcontato
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
+        jButton4.setBackground(new java.awt.Color(170, 213, 248));
+        jButton4.setBorder(null);
+        jButton4.setBorderPainted(false);
+
+        // jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
+        // // jButton3.setText("jButton3");
+        // jButton4.setBackground(new java.awt.Color(170, 213, 248));
+        // jButton4.setBorder(null);
+        // jButton3.setBorderPainted(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -435,13 +465,18 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGap(16, 16, 16)
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)))
-                        .addContainerGap(23, Short.MAX_VALUE))
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3)))
+                        .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1)
-                        .addGap(83, 83, 83))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,7 +484,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
@@ -457,9 +493,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addGap(67, 67, 67)
+                        .addGap(79, 79, 79)
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 68, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -511,6 +549,8 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
