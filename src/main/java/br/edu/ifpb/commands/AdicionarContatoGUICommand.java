@@ -4,8 +4,10 @@ import javax.swing.*;
 
 import main.java.br.edu.ifpb.repository.ContatoRepository;
 import main.java.br.edu.ifpb.service.ContatoService;
+import main.java.br.edu.ifpb.validators.AniversarioValidator;
 import main.java.br.edu.ifpb.validators.GUITextValidator;
 import main.java.br.edu.ifpb.validators.NonEmptyValidator;
+import main.java.br.edu.ifpb.validators.TelefoneValidator;
 
 
 public class AdicionarContatoGUICommand implements Command{
@@ -22,9 +24,8 @@ public class AdicionarContatoGUICommand implements Command{
 
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
-    public AdicionarContatoGUICommand(JTextField nome, JTextField sobrenome, JTextField ligacao,
-            JTextField chamadaVideo, JTextField categoria, JTextField valorDaEntrada, JTextField redeSocial,
-            JTextField telefone, JTextField aniversario, JFrame frame) {
+    public AdicionarContatoGUICommand(JTextField nome, JTextField sobrenome, JTextField ligacao,JTextField chamadaVideo, JTextField categoria, JTextField valorDaEntrada, JTextField redeSocial,
+    JTextField telefone, JTextField aniversario, JFrame frame) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.ligacao = ligacao;
@@ -50,11 +51,25 @@ public class AdicionarContatoGUICommand implements Command{
         String aniversarioStr = aniversario.getText();
 
 
-        GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());        GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
+        GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
 
-        boolean nomeIsValid = nomeValidator.validate(nome);
 
-        if (nomeIsValid) {
+
+        boolean nomeIsValid = nomeValidator.validate(nome);        
+        boolean sobrenomeIsValid = sobrenomeValidator.validate(sobrenome);
+        boolean categoriaIsValid = categoriaValidator.validate(categoria);
+        boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
+        boolean redeSocialIsValid = redeSocialValidator.validate(aniversario);
+        boolean telefoneIsValid = telefoneValidator.validate(telefone);      
+        boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
+
+
+
+        if (nomeIsValid && sobrenomeIsValid && categoriaIsValid && valorDaEntradaIsValid && redeSocialIsValid && telefoneIsValid && aniversarioIsValid) {
             JOptionPane.showMessageDialog(nome.getParent(), "Paciente cadastrado com sucesso.");
             service.criar(nomeStr, sobrenomeStr, false, false, categoriaStr,  valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
             frame.setVisible(false);
