@@ -16,8 +16,8 @@ public class ListarContatosPorRedeCommand implements Command {
         List<Contato> contatos = contatoService.getContatos();
 
         System.out.println("\n-------------------------------");
-        System.out.println("Listar contatos por Rede Social\n");
-        System.out.println("\n-------------------------------");
+        System.out.println("Listar contatos por Rede Social");
+        System.out.println("-------------------------------\n");
         System.out.println("[1] - Email \n[2] - WhatsApp \n[3] - Instagram ");
 
         ValidationContext<Integer> intValidationContext = new ValidationContext<>(new IntervalValidator(1, 3));

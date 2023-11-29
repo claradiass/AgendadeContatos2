@@ -16,8 +16,8 @@ public class ListarPorCategoriaCommand implements Command {
         List<Contato> contatos = contatoService.getContatos();
 
         System.out.println("\n-------------------------------");
-        System.out.println("Listar contatos por Categoria\n");
-        System.out.println("\n-------------------------------");
+        System.out.println("Listar contatos por Categoria");
+        System.out.println("-------------------------------\n");
         System.out.println("[1] - Favoritos \n[2] - Pessoal \n[3] - Trabalho");
 
         ValidationContext<Integer> intValidationContext = new ValidationContext<>(new IntervalValidator(1, 3));
