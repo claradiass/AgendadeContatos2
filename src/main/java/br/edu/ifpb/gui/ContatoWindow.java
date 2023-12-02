@@ -49,8 +49,12 @@ public class ContatoWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(33, 50, 78));
         jLabel1.setText("Adicionar Contato");
 
+        jLabel2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(33, 50, 78));
         jLabel2.setText("Nome");
 
         jTextField1.setText("");
@@ -61,8 +65,12 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(33, 50, 78));
         jLabel3.setText("Sobrenome");
 
+        jLabel4.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(33, 50, 78));
         jLabel4.setText("Telefone");
 
         jTextField3.setText("");
@@ -73,6 +81,8 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(33, 50, 78));
         jLabel5.setText("Rede Social");
 
         jTextField4.setText("");
@@ -83,12 +93,20 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
+        jRadioButton1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 11)); // NOI18N
+        jRadioButton1.setForeground(new java.awt.Color(33, 50, 78));
         jRadioButton1.setLabel("WhatsApp");
 
+        jRadioButton2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 12)); // NOI18N
+        jRadioButton2.setForeground(new java.awt.Color(33, 50, 78));
         jRadioButton2.setLabel("Email");
-
+    
+        jRadioButton3.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 11)); // NOI18N
+        jRadioButton3.setForeground(new java.awt.Color(33, 50, 78));
         jRadioButton3.setLabel("Instagram");
 
+        jLabel6.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(33, 50, 78));
         jLabel6.setVisible(false);
 
         jTextFieldWhatsApp.setVisible(false);
