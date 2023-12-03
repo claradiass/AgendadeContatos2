@@ -7,8 +7,13 @@ import main.java.br.edu.ifpb.repository.ContatoRepository;
 import main.java.br.edu.ifpb.repository.FileDataService;
 import main.java.br.edu.ifpb.service.ContatoService;
 
-import javax.swing.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 // public class MainWindow {
 //     private final JFrame frame;
@@ -348,6 +353,9 @@ import javax.swing.*;
 // }
 
 import main.java.br.edu.ifpb.service.ContatoService;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 
 public class MainWindow extends javax.swing.JFrame {
@@ -364,11 +372,110 @@ public class MainWindow extends javax.swing.JFrame {
         imagePanel = new ImagePanel("Blue wallpaper.png");
         setContentPane(imagePanel);
         initComponents();
-
+        initContactListListener();
         
+    }
+
+    private void atualizarListaDeContatos() {
+        String filtro = (String) jComboBox1.getSelectedItem();
+        String termoBusca = jTextField1.getText().trim();
+        
+        List<Contato> contatosFiltrados;
+    
+    
+    
+        if (!termoBusca.isEmpty()) {
+            // Se o campo de texto não estiver vazio, realizar a busca por nome
+            contatosFiltrados = dataService.buscar(termoBusca);
+        } else if ("Todos".equals(filtro)) {
+            // Se o campo de texto estiver vazio e o filtro for "Todos", obter todos os contatos
+            contatosFiltrados = dataService.getContatos();
+        } else {
+            // Verifica se o filtro é uma categoria válida
+            if (Arrays.asList("Instagram", "WhatsApp", "Email").contains(filtro)) {
+                contatosFiltrados = dataService.filtrarPorRedeSocial(filtro);
+            } else {
+                // Se não for uma categoria válida, considera como filtro de categoria
+                contatosFiltrados = dataService.filtrarPorCategoria(filtro);
+            }
+        }
+    
+        list.setListData(contatosFiltrados.toArray(new Contato[0]));
+        
+            if (contatosFiltrados.isEmpty()) {
+                // Mostra uma mensagem quando a lista estiver vazia
+                JOptionPane.showMessageDialog(this, "Nenhum contato encontrado.", "Lista Vazia", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                list.setListData(contatosFiltrados.toArray(new Contato[0]));
+            }
         
         
     }
+
+
+    
+    
+    
+
+    private void initContactListListener() {
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    Contato selectedContato = list.getSelectedValue();
+                    updateContactDetails(selectedContato);
+                }
+            }
+        });
+    }
+
+    private void updateContactDetails(Contato contato) {
+        if (contato != null) {
+            StringBuilder details = new StringBuilder("<html>");
+            details.append("<b>Nome:</b> ").append(contato.getNome()).append("<br>");
+            details.append("<b>Sobrenome:</b> ").append(contato.getSobrenome()).append("<br>");
+            details.append("<b>Telefone:</b> ").append(contato.getTelefone()).append("<br>");
+            details.append("<b>Aniversário:</b> ").append(contato.getAniversario()).append("<br>");
+            details.append("<b>Ligação:</b> ").append(contato.isLigacao()).append("<br>");
+            details.append("<b>Chamada de Vídeo:</b> ").append(contato.isChamadaVideo()).append("<br>");
+            details.append("<b>Categoria:</b> ").append(contato.getCategoria()).append("<br>");
+    
+            if ("Instagram".equalsIgnoreCase(contato.getRedeSocial())) {
+                // Se a rede social for Instagram, exibir "Usuário" em vez de "Valor da Entrada"
+                details.append("<b>Usuário:</b> ").append(contato.getValorDaEntrada()).append("<br>");
+            } else if ("Email".equalsIgnoreCase(contato.getRedeSocial())) {
+                details.append("<b>Email:</b> ").append(contato.getValorDaEntrada()).append("<br>");
+            } else {
+                // Se a rede social não for Instagram, exibir "Valor da Entrada"
+                details.append("<b>Valor da Entrada:</b> ").append(contato.getValorDaEntrada()).append("<br>");
+            }
+    
+            details.append("<b>Rede Social:</b> ").append(contato.getRedeSocial()).append("<br>");
+            
+            details.append("</html>");
+    
+            jLabel4.setText(details.toString());
+        } else {
+            jLabel3.setText("Selecione um contato para ver suas informações");
+            // Limpe outras informações, se necessário
+        }
+    }
+
+    private void excluirContatoSelecionado() {
+        Contato selectedContato = list.getSelectedValue();
+        if (selectedContato != null) {
+            // Excluir o contato
+            dataService.remover(selectedContato);
+            atualizarListaDeContatos();
+            updateContactDetails(null); // Limpar os detalhes após a exclusão
+            JOptionPane.showMessageDialog(MainWindow.this, "Contato excluído com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(MainWindow.this, "Selecione um contato para excluir.");
+        }
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -388,6 +495,8 @@ public class MainWindow extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         list = new JList<>();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -396,27 +505,65 @@ public class MainWindow extends javax.swing.JFrame {
         dataService = new ContatoService(repository);
 
         list.setListData(dataService.getContatos().toArray(new Contato[0]));
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizarListaDeContatos();
+            }
+        });
+
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Adicione um diálogo de confirmação
+                int option = JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    excluirContatoSelecionado();
+                }
+            }
+        });
+
+
+        
 
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 300));
-        setMinimumSize(new java.awt.Dimension(500, 300));
-        setPreferredSize(new java.awt.Dimension(1000,800));
+        setMaximumSize(new java.awt.Dimension(600, 400));
+        setMinimumSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(600,400));
         setTitle("Agenda de Contatos");
 
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 50, 78));
         jLabel1.setText("Agenda de Contatos");
 
+        // jTextField1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 12)); // NOI18N
+        // jTextField1.setForeground(new java.awt.Color(33, 50, 78));
+        // jTextField1.setText(" ");
+        // jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         jTextField1ActionPerformed(evt);
+        //     }
+        // });
+
         jTextField1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(33, 50, 78));
         jTextField1.setText(" ");
+        jTextField1.setToolTipText("Pesquise um contato");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
+
+    // Adicione este trecho para chamar atualizarListaDeContatos() quando Enter for pressionado
+    jTextField1.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            atualizarListaDeContatos();
+        }
+    });
 
         
         list.setBackground(new java.awt.Color(170, 213, 248));
@@ -424,7 +571,7 @@ public class MainWindow extends javax.swing.JFrame {
         list.setForeground(new java.awt.Color(33, 50, 78));
         list.setListData(dataService.getContatos().toArray(new Contato[0]));
 
-        
+
         
 
         // list.setModel(new javax.swing.AbstractListModel<String>() {
@@ -438,22 +585,25 @@ public class MainWindow extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Excluir");
+        jButton1.setToolTipText("Exclua um contato selecionado");
 
-        jLabel2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(33, 50, 78));
-        jLabel2.setText("Adicionar novo contato");
+        // jLabel2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
+        // jLabel2.setForeground(new java.awt.Color(33, 50, 78));
+        // jLabel2.setText("Adicionar novo contato");
 
         jButton2.setBackground(new java.awt.Color(33, 50, 78));
         jButton2.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Editar");
+        jButton2.setToolTipText("Edite um contato selecionado");
 
-        jButton3.setBackground(new java.awt.Color(170, 213, 248));
+        // jButton3.setBackground(new java.awt.Color(170, 213, 248));
         // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
-        // jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
-        // jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        // jButton3.setText("Adicionar novo contato");
-        // jButton1.setPreferredSize(new java.awt.Dimension(120, 40));
+        jButton3.setBackground(new java.awt.Color(33, 50, 78));
+        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Adicionar contato");
+        jButton3.setToolTipText("Adicione um novo contato");
         // jButton3.setBorder(null);
         // jButton3.setBorderPainted(false);
         jButton3.addActionListener(e -> {
@@ -463,18 +613,19 @@ public class MainWindow extends javax.swing.JFrame {
             new ContatoWindow(this, null).show();
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
+        // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
+        // jButton3.setBorder(null);
+        // jButton3.setBorderPainted(false);
 
         //JtextFieldcontato
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
-        jButton4.setBackground(new java.awt.Color(170, 213, 248));
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
+        // jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
+        // jButton4.setBackground(new java.awt.Color(170, 213, 248));
+        // jButton4.setBorder(null);
+        // jButton4.setBorderPainted(false);
 
         jComboBox1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        
         jComboBox1.setForeground(new java.awt.Color(33, 50, 78));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Instagram", "WhatsApp", "Email", "Pessoal", "Trabalho", "Favoritos" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -482,6 +633,34 @@ public class MainWindow extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
+        jComboBox1.setBackground(new java.awt.Color(170, 213, 248)); // Cor branca
+
+// Defina a cor do texto no JComboBox
+jComboBox1.setForeground(new java.awt.Color(33, 50, 78)); // Cor personalizada (RGB)
+
+// Defina a fonte do JComboBox
+jComboBox1.setFont(new java.awt.Font("Liberation Sans", java.awt.Font.BOLD, 15));
+
+// Outras propriedades que você pode considerar ajustar:
+// Defina a borda do JComboBox
+jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(33, 50, 78), 3)); // Cor e largura da borda
+
+// Defina a opacidade do JComboBox
+jComboBox1.setOpaque(true);
+jComboBox1.setToolTipText("Selecione um filtro");
+
+
+        jLabel3.setBackground(new java.awt.Color(33, 50, 78));
+        jLabel3.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(33, 50, 78));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Informações do contato:");
+
+
+        jLabel4.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(33, 50, 78));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Selecione algum contato!");
 
         // jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
         // // jButton3.setText("jButton3");
@@ -500,28 +679,27 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jButton1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jButton3)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addContainerGap())))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 35, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,22 +708,21 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1)
+                                .addComponent(jButton2))
+                            .addComponent(jButton3))
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel2)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel4)
+                        .addContainerGap())))
         );
 
         pack();
@@ -604,8 +781,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    
     // End of variables declaration       
     
     

@@ -47,7 +47,12 @@ public class ContatoWindow extends javax.swing.JFrame {
         jTextFieldInstagram = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 300));
+        setMinimumSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(new java.awt.Dimension(500,300));
+        setTitle("Adicionar novo Contato");
+
 
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 50, 78));
