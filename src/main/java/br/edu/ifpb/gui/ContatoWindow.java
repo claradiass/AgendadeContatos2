@@ -9,15 +9,18 @@ import main.java.br.edu.ifpb.domain.Contato;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 
-public class ContatoWindow {
+public class ContatoWindow  extends javax.swing.JFrame{
     private final JFrame frame;
+    private ImagePanel imagePanel;
 
     public ContatoWindow(MainWindow main, Contato contato){
+        
         CommandExecutor commandExecutor = new CommandExecutor();
 
         frame = new JFrame("Adicionar Contato");
         JLabel labelNome = new JLabel("Nome:");
         JLabel labelData = new JLabel("Data de nascimento:");
+    
 
     }
 

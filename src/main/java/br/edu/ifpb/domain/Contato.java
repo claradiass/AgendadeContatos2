@@ -41,9 +41,14 @@ public class Contato implements Serializable {
             // compara se o contato tem o mesmo tipo de entrada e o mesmo valor da entrada
     }
 
+    // public String toString() {
+    //     return "Nome:" + getNome() + "\nSobrenome:" + getSobrenome() + "\nTelefone:" + getTelefone() + "\nRecebe Ligação?" + isLigacao() + "\nEssa ligação pode ser uma chamada de vídeo?" + 
+    //     isChamadaVideo() + "\nRede social: " + getRedeSocial() + "\nDado específico: " + getValorDaEntrada() + "\nData de aniversário:" + getAniversario() + "\nCategoria: " + getCategoria() + "\n";
+        
+    // }
+
     public String toString() {
-        return "Nome:" + getNome() + "\nSobrenome:" + getSobrenome() + "\nTelefone:" + getTelefone() + "\nRecebe Ligação?" + isLigacao() + "\nEssa ligação pode ser uma chamada de vídeo?" + 
-        isChamadaVideo() + "\nRede social: " + getRedeSocial() + "\nDado específico: " + getValorDaEntrada() + "\nData de aniversário:" + getAniversario() + "\nCategoria: " + getCategoria() + "\n";
+        return "Nome completo: " + getNome() + " " + getSobrenome() + "\n";
         
     }
 

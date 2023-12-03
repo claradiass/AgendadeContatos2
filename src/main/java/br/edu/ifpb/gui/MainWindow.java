@@ -3,6 +3,10 @@ package main.java.br.edu.ifpb.gui;
 
 
 import main.java.br.edu.ifpb.domain.Contato;
+import main.java.br.edu.ifpb.repository.ContatoRepository;
+import main.java.br.edu.ifpb.repository.FileDataService;
+import main.java.br.edu.ifpb.service.ContatoService;
+
 import javax.swing.*;
 
 
@@ -219,7 +223,7 @@ import javax.swing.*;
 //         jLabel3 = new javax.swing.JLabel();
 //         jLabel4 = new javax.swing.JLabel();
 //         jScrollPane1 = new javax.swing.JScrollPane();
-//         jList1 = new javax.swing.JList<>();
+//         list = new javax.swing.JList<>();
 //         jButton1 = new javax.swing.JButton();
 //         jButton2 = new javax.swing.JButton();
 //         jLabel5 = new javax.swing.JLabel();
@@ -245,16 +249,16 @@ import javax.swing.*;
 
 //         jScrollPane1.setBackground(new java.awt.Color(242, 242, 242));
 
-//         jList1.setBackground(new java.awt.Color(170, 213, 248));
-//         jList1.setBorder(null);
-//         jList1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
-//         jList1.setForeground(new java.awt.Color(33, 50, 78));
-//         jList1.setModel(new javax.swing.AbstractListModel<String>() {
+//         list.setBackground(new java.awt.Color(170, 213, 248));
+//         list.setBorder(null);
+//         list.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
+//         list.setForeground(new java.awt.Color(33, 50, 78));
+//         list.setModel(new javax.swing.AbstractListModel<String>() {
 //             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 5", "Item 5", "Item 5" };
 //             public int getSize() { return strings.length; }
 //             public String getElementAt(int i) { return strings[i]; }
 //         });
-//         jScrollPane1.setViewportView(jList1);
+//         jScrollPane1.setViewportView(list);
 
 //         getContentPane().add(jScrollPane1);
 //         jScrollPane1.setBounds(10, 50, 260, 170);
@@ -338,16 +342,20 @@ import javax.swing.*;
 //     private javax.swing.JLabel jLabel3;
 //     private javax.swing.JLabel jLabel4;
 //     private javax.swing.JLabel jLabel5;
-//     private javax.swing.JList<String> jList1;
+//     private javax.swing.JList<String> list;
 //     private javax.swing.JScrollPane jScrollPane1;
 //     // End of variables declaration                   
 // }
 
-
+import main.java.br.edu.ifpb.service.ContatoService;
 
 
 public class MainWindow extends javax.swing.JFrame {
         private ImagePanel imagePanel;
+        private ContatoService dataService;
+        private JList<Contato> list;
+
+
 
     /**
      * Creates new form MainWindow
@@ -356,6 +364,10 @@ public class MainWindow extends javax.swing.JFrame {
         imagePanel = new ImagePanel("Blue wallpaper.png");
         setContentPane(imagePanel);
         initComponents();
+
+        
+        
+        
     }
 
     /**
@@ -370,17 +382,27 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        // list = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        list = new JList<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+
+        ContatoRepository repository = ContatoRepository.getInstance();
+        repository.setRepository(new FileDataService());
+        dataService = new ContatoService(repository);
+
+        list.setListData(dataService.getContatos().toArray(new Contato[0]));
+
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 300));
         setMinimumSize(new java.awt.Dimension(500, 300));
-        setPreferredSize(new java.awt.Dimension(500,300));
+        setPreferredSize(new java.awt.Dimension(1000,800));
         setTitle("Agenda de Contatos");
 
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
@@ -396,15 +418,21 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jList1.setBackground(new java.awt.Color(170, 213, 248));
-        jList1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
-        jList1.setForeground(new java.awt.Color(33, 50, 78));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        
+        list.setBackground(new java.awt.Color(170, 213, 248));
+        list.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
+        list.setForeground(new java.awt.Color(33, 50, 78));
+        list.setListData(dataService.getContatos().toArray(new Contato[0]));
+
+        
+        
+
+        // list.setModel(new javax.swing.AbstractListModel<String>() {
+        //     String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+        //     public int getSize() { return strings.length; }
+        //     public String getElementAt(int i) { return strings[i]; }
+        // });
+        jScrollPane1.setViewportView(list);
 
         jButton1.setBackground(new java.awt.Color(33, 50, 78));
         jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
@@ -420,14 +448,14 @@ public class MainWindow extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Editar");
 
-        jButton3.setBackground(new java.awt.Color(33, 50, 78));
-        // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("mais1.png"))); // NOI18N
-        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Adicionar");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setPreferredSize(new java.awt.Dimension(300, 40));
+        jButton3.setBackground(new java.awt.Color(170, 213, 248));
+        // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
+        // jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        // jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        // jButton3.setText("Adicionar novo contato");
+        // jButton1.setPreferredSize(new java.awt.Dimension(120, 40));
+        // jButton3.setBorder(null);
+        // jButton3.setBorderPainted(false);
         jButton3.addActionListener(e -> {
             // PacienteWindow pode ser aberta para criação ou edição de um paciente
             // Se paciente for nulo, a janela funcionará para criar um novo
@@ -435,12 +463,25 @@ public class MainWindow extends javax.swing.JFrame {
             new ContatoWindow(this, null).show();
         });
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+
         //JtextFieldcontato
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
         jButton4.setBackground(new java.awt.Color(170, 213, 248));
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
+
+        jComboBox1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(33, 50, 78));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Instagram", "WhatsApp", "Email", "Pessoal", "Trabalho", "Favoritos" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         // jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
         // // jButton3.setText("jButton3");
@@ -456,20 +497,24 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(9, 9, 9)
                                 .addComponent(jButton3)))
-                        .addContainerGap(29, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -493,11 +538,13 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 68, Short.MAX_VALUE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -506,7 +553,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
-    }                                           
+    }   
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }                                        
 
     /**
      * @param args the command line arguments
@@ -551,10 +601,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    // End of variables declaration                   
+    // End of variables declaration       
+    
+    
 }
