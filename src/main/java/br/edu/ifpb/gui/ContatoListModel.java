@@ -4,13 +4,36 @@ import javax.swing.DefaultListModel;
 
 import main.java.br.edu.ifpb.domain.Contato;
 
+import javax.swing.*;
+import java.util.List;
 
 public class ContatoListModel extends DefaultListModel<Contato> {
-    @Override
-    public String getElementAt(int index) {
-        Contato contato = getElementAt(index);
-        // Edite esta linha conforme necessário para personalizar a exibição do Contato
-        return contato.getNome() + " - " + contato.getTelefone();
+    private List<Contato> contatos;
+    private Icon iconePadrao;
+
+    public ContatoListModel(List<Contato> contatos, Icon iconePadrao) {
+        this.contatos = contatos;
+        this.iconePadrao = iconePadrao;
+        updateModel();
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+        updateModel();
+    }
+
+    private void updateModel() {
+        clear();
+        for (Contato contato : contatos) {
+            addElement(contato);
+        }
+    }
+
+    public ListCellRenderer<Contato> getRenderer() {
+        return new ContatoListCellRenderer(iconePadrao);
     }
 }
+
+
+
 

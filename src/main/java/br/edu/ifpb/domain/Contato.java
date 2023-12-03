@@ -48,7 +48,7 @@ public class Contato implements Serializable {
     // }
 
     public String toString() {
-        return "Nome completo: " + getNome() + " " + getSobrenome() + "\n";
+        return "Nome: " + getNome() + " " + getSobrenome() + "\n";
         
     }
 

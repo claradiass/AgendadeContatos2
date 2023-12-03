@@ -47,6 +47,8 @@ public class ContatoWindow extends javax.swing.JFrame {
         jTextFieldInstagram = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
+        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 300));
         setMinimumSize(new java.awt.Dimension(500, 300));
