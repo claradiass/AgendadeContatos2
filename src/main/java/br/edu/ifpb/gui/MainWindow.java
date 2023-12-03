@@ -72,23 +72,25 @@ public class MainWindow extends javax.swing.JFrame {
             details.append("<b>Sobrenome:</b> ").append(contato.getSobrenome()).append("<br>");
             details.append("<b>Telefone:</b> ").append(contato.getTelefone()).append("<br>");
             details.append("<b>Aniversário:</b> ").append(contato.getAniversario()).append("<br>");
-            details.append("<b>Ligação:</b> ").append(contato.isLigacao()).append("<br>");
-            details.append("<b>Chamada de Vídeo:</b> ").append(contato.isChamadaVideo()).append("<br>");
+    
+            // Condição para determinar a cor do texto com base na ligação e chamada de vídeo
+            String ligacaoCor = contato.isLigacao() ? "green" : "red";
+            String chamadaVideoCor = contato.isChamadaVideo() ? "green" : "red";
+    
+            details.append("<font color=\"").append(ligacaoCor).append("\"><b>Ligação</b></font><br>");
+            details.append("<font color=\"").append(chamadaVideoCor).append("\"><b>Chamada de Vídeo</b></font><br>");
+    
             details.append("<b>Categoria:</b> ").append(contato.getCategoria()).append("<br>");
     
             if ("Instagram".equalsIgnoreCase(contato.getRedeSocial())) {
-                // Se a rede social for Instagram, exibir "Usuário" em vez de "Valor da Entrada"
                 details.append("<b>Usuário:</b> ").append(contato.getValorDaEntrada()).append("<br>");
+    
             } else if ("Email".equalsIgnoreCase(contato.getRedeSocial())) {
                 details.append("<b>Email:</b> ").append(contato.getValorDaEntrada()).append("<br>");
-            } else {
-                // Se a rede social não for Instagram, exibir "Valor da Entrada"
             }
     
             details.append("<b>Rede Social:</b> ").append(contato.getRedeSocial()).append("<br>");
-    
             details.append("</html>");
-    
             jLabel4.setText(details.toString());
     
         } else {
@@ -98,6 +100,7 @@ public class MainWindow extends javax.swing.JFrame {
             // Limpe outras informações, se necessário
         }
     }
+    
     
 
     private void excluirContatoSelecionado() {
