@@ -10,11 +10,11 @@ import main.java.br.edu.ifpb.validators.NonEmptyValidator;
 import main.java.br.edu.ifpb.validators.TelefoneValidator;
 
 
-public class AdicionarContatoGUICommand implements Command{
+public class AdicionarContatoGUICommand implements Command {
     private final JTextField nome;
     private final JTextField sobrenome;
-    private final JTextField ligacao;
-    private final JTextField chamadaVideo;
+    private final Boolean ligacao;
+    private final Boolean chamadaVideo;
     private final JTextField categoria;
     private final JTextField valorDaEntrada;
     private final JTextField redeSocial;
@@ -23,8 +23,9 @@ public class AdicionarContatoGUICommand implements Command{
 
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
-    public AdicionarContatoGUICommand(JTextField nome, JTextField sobrenome, JTextField ligacao,JTextField chamadaVideo, JTextField categoria, JTextField valorDaEntrada, JTextField redeSocial,
-    JTextField telefone, JTextField aniversario) {
+    public AdicionarContatoGUICommand(JTextField nome, JTextField sobrenome, Boolean ligacao,
+                                    Boolean chamadaVideo, JTextField categoria, JTextField valorDaEntrada,
+                                    JTextField redeSocial, JTextField telefone, JTextField aniversario) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.ligacao = ligacao;
@@ -37,41 +38,37 @@ public class AdicionarContatoGUICommand implements Command{
     }
 
     @Override
-    public void execute(){
+    public void execute() {
         String nomeStr = nome.getText();
         String sobrenomeStr = sobrenome.getText();
-        // String ligacaoBoo = ligacao.getText();
-        // String chamadaVideoBoo = chamadaVideo.getText();
+        boolean ligacaoValor = ligacao != null && ligacao; // Se ligacao for null, assume false
+        boolean chamadaVideoValor = chamadaVideo != null && chamadaVideo; // Se chamadaVideo for null, assume false
         String categoriaStr = categoria.getText();
         String valorDaEntradaStr = valorDaEntrada.getText();
         String redeSocialStr = redeSocial.getText();
         String telefoneStr = telefone.getText();
         String aniversarioStr = aniversario.getText();
 
-
-        GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
-        GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());        GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());
         GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());
         GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
 
-
-
-        boolean nomeIsValid = nomeValidator.validate(nome);        
+        boolean nomeIsValid = nomeValidator.validate(nome);
         boolean sobrenomeIsValid = sobrenomeValidator.validate(sobrenome);
         boolean categoriaIsValid = categoriaValidator.validate(categoria);
         boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
-        boolean redeSocialIsValid = redeSocialValidator.validate(aniversario);
-        boolean telefoneIsValid = telefoneValidator.validate(telefone);      
+        boolean redeSocialIsValid = redeSocialValidator.validate(redeSocial);
+        boolean telefoneIsValid = telefoneValidator.validate(telefone);
         boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
 
-
-
         if (nomeIsValid && sobrenomeIsValid && categoriaIsValid && valorDaEntradaIsValid && redeSocialIsValid && telefoneIsValid && aniversarioIsValid) {
-            JOptionPane.showMessageDialog(nome.getParent(), "Paciente cadastrado com sucesso.");
-            service.criar(nomeStr, sobrenomeStr, false, false, categoriaStr,  valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
+            JOptionPane.showMessageDialog(nome.getParent(), "Contato adicionado com sucesso.");
+            service.criar(nomeStr, sobrenomeStr, ligacao, chamadaVideo, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
         }
-
-
     }
 }
+

@@ -49,6 +49,36 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         }
 
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Valores de teste para os campos específicos
+                boolean ligacao = true;
+                boolean chamadaVideo = false;
+                String aniversario = jTextFieldAniversario.getText();
+    String categoria = jTextFieldCategoria.getText();
+        
+                // Obtenha os valores dos outros campos como antes
+                String nome = jTextField1.getText();
+                String sobrenome = jTextField3.getText();
+                String telefone = jTextField4.getText();
+        
+                // Determine qual rede social foi escolhida
+                String redeSocial = "";
+                if (jRadioButton1.isSelected()) {
+                    redeSocial = "WhatsApp";
+                } else if (jRadioButton2.isSelected()) {
+                    redeSocial = "Email";
+                } else if (jRadioButton3.isSelected()) {
+                    redeSocial = "Instagram";
+                }
+        
+                // Execute o comando para adicionar o contato
+                commandExecutor.executeCommand(new AdicionarContatoGUICommand(jTextField1, jTextField3, ligacao, chamadaVideo,
+                        jTextFieldCategoria, jTextFieldEmail, jTextFieldWhatsApp, jTextField4, jTextFieldAniversario));
+            }
+        });
+        
         
     
     }
@@ -134,7 +164,10 @@ public class ContatoWindow extends javax.swing.JFrame {
 
         
 
-        
+        jLabel7 = new javax.swing.JLabel();
+    jTextFieldAniversario = new javax.swing.JTextField();
+    jLabel8 = new javax.swing.JLabel();
+    jTextFieldCategoria = new javax.swing.JTextField();
 
 
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
@@ -243,6 +276,7 @@ public class ContatoWindow extends javax.swing.JFrame {
                     jLabel6.setVisible(true);
                     jLabel6.setText("WhatsApp");
                     jTextFieldWhatsApp.setVisible(true);
+                    String redeSocialEscolhida = "WhatsApp";
                 } else if(!jRadioButton1.isSelected()) {
                     jLabel6.setVisible(false);
                     jTextFieldWhatsApp.setVisible(false);
@@ -257,6 +291,7 @@ public class ContatoWindow extends javax.swing.JFrame {
                     jLabel6.setVisible(true);
                     jLabel6.setText("Email");
                     jTextFieldEmail.setVisible(true);
+                    String redeSocialEscolhida = "Email";
                 } else if(!jRadioButton2.isSelected()) {
                     jLabel6.setVisible(false);
                     jTextFieldEmail.setVisible(false);
@@ -271,6 +306,7 @@ public class ContatoWindow extends javax.swing.JFrame {
                     jLabel6.setVisible(true);
                     jLabel6.setText("Instagram");
                     jTextFieldInstagram.setVisible(true);
+                    String redeSocialEscolhida = "Instagram";
                 } else if(!jRadioButton3.isSelected()) {
                     jLabel6.setVisible(false);
                     jTextFieldInstagram.setVisible(false);
@@ -283,6 +319,20 @@ public class ContatoWindow extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         
+
+        jLabel7.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+    jLabel7.setForeground(new java.awt.Color(33, 50, 78));
+    jLabel7.setText("Aniversário");
+
+    jTextFieldAniversario.setText("");
+    jTextFieldAniversario.setPreferredSize(new java.awt.Dimension(150, 20));
+
+    jLabel8.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
+    jLabel8.setForeground(new java.awt.Color(33, 50, 78));
+    jLabel8.setText("Categoria");
+
+    jTextFieldCategoria.setText("");
+    jTextFieldCategoria.setPreferredSize(new java.awt.Dimension(150, 20));
         
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -416,6 +466,8 @@ public class ContatoWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -425,6 +477,8 @@ public class ContatoWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldWhatsApp;    
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldInstagram;
+    private javax.swing.JTextField jTextFieldAniversario;
+private javax.swing.JTextField jTextFieldCategoria;
 
 
     // End of variables declaration                   
