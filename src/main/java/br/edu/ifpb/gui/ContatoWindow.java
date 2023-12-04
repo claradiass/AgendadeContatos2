@@ -98,7 +98,11 @@ public class ContatoWindow extends javax.swing.JFrame {
         buttonGroup.add(jRadioButton5);
         buttonGroup.add(jRadioButton6);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(400, 520));
+        setMinimumSize(new java.awt.Dimension(400, 520));
+        setPreferredSize(new java.awt.Dimension(400, 520));
+        setTitle("Adicionar Contato");
 
         jLabel1.setText("Adicionar Contato");
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
@@ -161,8 +165,14 @@ public class ContatoWindow extends javax.swing.JFrame {
         });
 
         jButton1.setText("Adicionar");
+        jButton1.setBackground(new java.awt.Color(170, 213, 248));
+        jButton1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(33, 50, 78));
 
         jButton2.setText("Cancelar");
+        jButton2.setBackground(new java.awt.Color(170, 213, 248));
+        jButton2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(33, 50, 78));
 
         jLabel7.setText("Aniversário");
         jLabel7.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
