@@ -100,6 +100,16 @@ public class MainWindow extends javax.swing.JFrame {
             // Limpe outras informações, se necessário
         }
     }
+
+    private void editarContatoSelecionado() {
+        Contato selectedContato = list.getSelectedValue();
+        if (selectedContato != null) {
+            // Abra a janela de edição passando o contato selecionado
+            new ContatoWindow(this, selectedContato).show();
+        } else {
+            JOptionPane.showMessageDialog(MainWindow.this, "Selecione um contato para editar.");
+        }
+    }
     
     
 
@@ -200,6 +210,14 @@ public class MainWindow extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Editar");
         jButton2.setToolTipText("Edite um contato selecionado");
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editarContatoSelecionado();
+            }
+        });
+        
+        
 
         // jButton3.setBackground(new java.awt.Color(170, 213, 248));
         // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N

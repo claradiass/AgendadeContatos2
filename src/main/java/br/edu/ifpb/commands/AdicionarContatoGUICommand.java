@@ -20,12 +20,11 @@ public class AdicionarContatoGUICommand implements Command{
     private final JTextField redeSocial;
     private final JTextField telefone;
     private final JTextField aniversario;
-    private final JFrame frame;
 
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
     public AdicionarContatoGUICommand(JTextField nome, JTextField sobrenome, JTextField ligacao,JTextField chamadaVideo, JTextField categoria, JTextField valorDaEntrada, JTextField redeSocial,
-    JTextField telefone, JTextField aniversario, JFrame frame) {
+    JTextField telefone, JTextField aniversario) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.ligacao = ligacao;
@@ -35,7 +34,6 @@ public class AdicionarContatoGUICommand implements Command{
         this.redeSocial = redeSocial;
         this.telefone = telefone;
         this.aniversario = aniversario;
-        this.frame = frame;
     }
 
     @Override
@@ -72,7 +70,6 @@ public class AdicionarContatoGUICommand implements Command{
         if (nomeIsValid && sobrenomeIsValid && categoriaIsValid && valorDaEntradaIsValid && redeSocialIsValid && telefoneIsValid && aniversarioIsValid) {
             JOptionPane.showMessageDialog(nome.getParent(), "Paciente cadastrado com sucesso.");
             service.criar(nomeStr, sobrenomeStr, false, false, categoriaStr,  valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
-            frame.setVisible(false);
         }
 
 

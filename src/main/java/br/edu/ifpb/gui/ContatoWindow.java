@@ -3,9 +3,13 @@ package main.java.br.edu.ifpb.gui;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 
+import main.java.br.edu.ifpb.commands.AdicionarContatoGUICommand;
+import main.java.br.edu.ifpb.commands.CommandExecutor;
 import main.java.br.edu.ifpb.domain.Contato;
 
 public class ContatoWindow extends javax.swing.JFrame {
@@ -15,15 +19,88 @@ public class ContatoWindow extends javax.swing.JFrame {
 
 
     public ContatoWindow(MainWindow main, Contato contato) {
+        CommandExecutor commandExecutor = new CommandExecutor();
         imagePanel = new ImagePanel("Blue wallpaper.png");
         setContentPane(imagePanel);
         initComponents();
         setLocationRelativeTo(null);
+        JScrollPane scrollPane = new JScrollPane(getContentPane());
+
+        // Definir o JScrollPane como o conteúdo da janela
+        setContentPane(scrollPane);
+
+        setLocationRelativeTo(null);
+
+        if (contato != null) {
+            jTextField1.setText(contato.getNome());
+            jTextField3.setText(contato.getSobrenome());
+            jTextField4.setText(contato.getTelefone());
+
+            // Lógica para determinar a rede social do contato
+            if (contato.getRedeSocial().equals("WhatsApp")) {
+                jRadioButton1.setSelected(true);
+                jTextFieldWhatsApp.setText(contato.getRedeSocial());
+            } else if (contato.getRedeSocial().equals("Email")) {
+                jRadioButton2.setSelected(true);
+                jTextFieldEmail.setText(contato.getRedeSocial());
+            } else if (contato.getRedeSocial().equals("Instagram")) {
+                jRadioButton3.setSelected(true);
+                jTextFieldInstagram.setText(contato.getRedeSocial());
+            }
+        }
+
+        
+    
     }
+
+    // TESTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+    // private void adicionarOuEditarContato(MainWindow main, Contato contato) {
+    //     // Obtenha os valores dos campos
+    //     String nome = jTextField1.getText();
+    //     String sobrenome = jTextField3.getText();
+    //     String telefone = jTextField4.getText();
+    //     String categoria = "";  // Defina a categoria conforme necessário
+    //     String valorDaEntrada = "";  // Defina o valor da entrada conforme necessário
+    //     String redeSocial = "";
+    //     String aniversario = "";  // Defina o aniversário conforme necessário
+    //     Boolean ligacao = null;
+    //     Boolean chamadaVideo = null;
+        
+
+
+    //     // Lógica para obter valores de outros campos
+
+    //     // Crie um novo objeto Contato
+    //     Contato novoContato = new Contato(nome, sobrenome, false, false,
+    //             categoria, valorDaEntrada, redeSocial, telefone, aniversario);
+
+    //     // Lógica para adicionar ou editar o contato no seu sistema
+    //     if (contato == null) {
+    //         // Adicionar novo contato
+    //         commandExecutor.executeCommand(new AdicionarContatoGUICommand( nome,  sobrenome,  ligacao, chamadaVideo,  categoria,  valorDaEntrada,  redeSocial,
+    //          telefone,  aniversario ));
+    //     } else {
+    //         // Editar contato existente
+    //         // main.editarContato(contato, novoContato);
+    //     }
+
+    //     // Atualize a interface principal
+    //     // main.update();
+
+    //     // Feche a janela de ContatoWindow
+    //     setVisible(false);
+    // }
+
+
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+
+        
+
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -55,6 +132,10 @@ public class ContatoWindow extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(500,300));
         setTitle("Adicionar novo Contato");
 
+        
+
+        
+
 
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 50, 78));
@@ -65,6 +146,9 @@ public class ContatoWindow extends javax.swing.JFrame {
         jLabel2.setText("Nome");
 
         jTextField1.setText("");
+        jTextField1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 12)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(33, 50, 78));
+        jTextField1.setText(" ");
         jTextField1.setPreferredSize(new java.awt.Dimension(150, 50));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +208,15 @@ public class ContatoWindow extends javax.swing.JFrame {
                 jTextFieldWhatsAppActionPerformed(evt);
             }
         });
+
+        // jTextFieldEmail.setVisible(false);
+        // jTextFieldEmail.setText("");
+        // jTextFieldEmail.setPreferredSize(new java.awt.Dimension(150, 50));
+        // jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+        //     public void actionPerformed(java.awt.event.ActionEvent evt) {
+        //         jTextFieldEmailActionPerformed(evt);
+        //     }
+        // });
 
         jTextFieldEmail.setVisible(false);
         jTextFieldEmail.setText("");
@@ -186,6 +279,11 @@ public class ContatoWindow extends javax.swing.JFrame {
         });
 
         jButton1.setText("Adicionar");
+        jButton1.setBackground(new java.awt.Color(33, 50, 78));
+        jButton1.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
