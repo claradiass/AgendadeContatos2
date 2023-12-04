@@ -246,7 +246,7 @@ public class MainWindow extends javax.swing.JFrame {
         jComboBox1.setForeground(new java.awt.Color(33, 50, 78)); // Cor personalizada (RGB)
         jComboBox1.setFont(new java.awt.Font("Liberation Sans", java.awt.Font.BOLD, 15));
         // Defina a borda do JComboBox
-        jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(33, 50, 78), 3)); // Cor e largura da borda
+        // jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 213, 248), 3)); // Cor e largura da borda
         // Defina a opacidade do JComboBox
         jComboBox1.setOpaque(true);
         jComboBox1.setToolTipText("Selecione um filtro");

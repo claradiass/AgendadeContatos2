@@ -21,10 +21,13 @@ import main.java.br.edu.ifpb.domain.Contato;
 public class ContatoWindow extends javax.swing.JFrame {
     private ImagePanel imagePanel;
     private ButtonGroup buttonGroup;
+    private Contato contato;
     /**
      * Creates new form ContatoWindow
      */
     public ContatoWindow(MainWindow main, Contato contato) {
+        this.contato = contato;
+
         CommandExecutor commandExecutor = new CommandExecutor();
         imagePanel = new ImagePanel("Blue wallpaper.png");
         setContentPane(imagePanel);
@@ -41,16 +44,28 @@ public class ContatoWindow extends javax.swing.JFrame {
             jTextField1.setText(contato.getNome());
             jTextField3.setText(contato.getSobrenome());
             jTextField4.setText(contato.getTelefone());
+            jTextField6.setText(contato.getAniversario());
 
             // Lógica para determinar a rede social do contato
-            if (contato.getRedeSocial().equals("WhatsApp")) {
+            if (contato.getCategoria().equals("Favoritos")) {
                 jRadioButton1.setSelected(true);
+                jTextField7.setText(contato.getCategoria());
+            } else if (contato.getCategoria().equals("Trabalho")) {
+                jRadioButton2.setSelected(true);
+                jTextField7.setText(contato.getCategoria());
+            } else if (contato.getCategoria().equals("Pessoal")) {
+                jRadioButton3.setSelected(true);
+                jTextField7.setText(contato.getCategoria());
+            }
+
+            if (contato.getRedeSocial().equals("WhatsApp")) {
+                jRadioButton5.setSelected(true);
                 jTextField7.setText(contato.getRedeSocial());
             } else if (contato.getRedeSocial().equals("Email")) {
-                jRadioButton2.setSelected(true);
+                jRadioButton4.setSelected(true);
                 jTextField7.setText(contato.getRedeSocial());
             } else if (contato.getRedeSocial().equals("Instagram")) {
-                jRadioButton3.setSelected(true);
+                jRadioButton5.setSelected(true);
                 jTextField7.setText(contato.getRedeSocial());
             }
         }
@@ -156,6 +171,11 @@ public class ContatoWindow extends javax.swing.JFrame {
         });
 
         jRadioButton2.setText("Trabalho");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
         jRadioButton3.setText("Pessoal");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +184,7 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Adicionar");
+        jButton1.setText(contato == null ? "Adicionar" : "Editar");
         jButton1.setBackground(new java.awt.Color(170, 213, 248));
         jButton1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(33, 50, 78));
@@ -173,6 +193,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(170, 213, 248));
         jButton2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(33, 50, 78));
+        jButton2.addActionListener(e -> this.setVisible(false));
 
         jLabel7.setText("Aniversário");
         jLabel7.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 13)); // NOI18N
@@ -186,7 +207,8 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton5.setLabel("Instagram");        jRadioButton4.setLabel("Email");
+        jRadioButton5.setLabel("Instagram");        
+        jRadioButton4.setLabel("Email");
         jRadioButton6.setLabel("WhatsApp");
 
         jRadioButton5.addActionListener(new ActionListener() {
