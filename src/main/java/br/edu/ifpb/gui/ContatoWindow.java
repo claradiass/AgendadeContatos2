@@ -39,13 +39,13 @@ public class ContatoWindow extends javax.swing.JFrame {
             // Lógica para determinar a rede social do contato
             if (contato.getRedeSocial().equals("WhatsApp")) {
                 jRadioButton1.setSelected(true);
-                jTextFieldWhatsApp.setText(contato.getRedeSocial());
+                jTextFieldRedeSocial.setText(contato.getRedeSocial());
             } else if (contato.getRedeSocial().equals("Email")) {
                 jRadioButton2.setSelected(true);
-                jTextFieldEmail.setText(contato.getRedeSocial());
+                jTextFieldRedeSocial.setText(contato.getRedeSocial());
             } else if (contato.getRedeSocial().equals("Instagram")) {
                 jRadioButton3.setSelected(true);
-                jTextFieldInstagram.setText(contato.getRedeSocial());
+                jTextFieldRedeSocial.setText(contato.getRedeSocial());
             }
         }
 
@@ -119,9 +119,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         buttonGroup.add(jRadioButton3);
 
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldWhatsApp = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldInstagram = new javax.swing.JTextField();
+        jTextFieldRedeSocial = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         
@@ -200,12 +198,12 @@ public class ContatoWindow extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(33, 50, 78));
         jLabel6.setVisible(false);
 
-        jTextFieldWhatsApp.setVisible(false);
-        jTextFieldWhatsApp.setText("");
-        jTextFieldWhatsApp.setPreferredSize(new java.awt.Dimension(150, 50));
-        jTextFieldWhatsApp.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldRedeSocial.setVisible(false);
+        jTextFieldRedeSocial.setText("");
+        jTextFieldRedeSocial.setPreferredSize(new java.awt.Dimension(150, 50));
+        jTextFieldRedeSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldWhatsAppActionPerformed(evt);
+                jTextFieldRedeSocialActionPerformed(evt);
             }
         });
 
@@ -218,21 +216,21 @@ public class ContatoWindow extends javax.swing.JFrame {
         //     }
         // });
 
-        jTextFieldEmail.setVisible(false);
-        jTextFieldEmail.setText("");
-        jTextFieldEmail.setPreferredSize(new java.awt.Dimension(150, 50));
-        jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldRedeSocial.setVisible(false);
+        jTextFieldRedeSocial.setText("");
+        jTextFieldRedeSocial.setPreferredSize(new java.awt.Dimension(150, 50));
+        jTextFieldRedeSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEmailActionPerformed(evt);
+                jTextFieldRedeSocialActionPerformed(evt);
             }
         });
 
-        jTextFieldInstagram.setVisible(false);
-        jTextFieldInstagram.setText("");
-        jTextFieldInstagram.setPreferredSize(new java.awt.Dimension(150, 50));
-        jTextFieldInstagram.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldRedeSocial.setVisible(false);
+        jTextFieldRedeSocial.setText("");
+        jTextFieldRedeSocial.setPreferredSize(new java.awt.Dimension(150, 50));
+        jTextFieldRedeSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldInstagramActionPerformed(evt);
+                jTextFieldRedeSocialActionPerformed(evt);
             }
         });
 
@@ -242,10 +240,10 @@ public class ContatoWindow extends javax.swing.JFrame {
                 if (jRadioButton1.isSelected()) {
                     jLabel6.setVisible(true);
                     jLabel6.setText("WhatsApp");
-                    jTextFieldWhatsApp.setVisible(true);
+                    jTextFieldRedeSocial.setVisible(true);
                 } else if(!jRadioButton1.isSelected()) {
                     jLabel6.setVisible(false);
-                    jTextFieldWhatsApp.setVisible(false);
+                    jTextFieldRedeSocial.setVisible(false);
                 }
             }
         });
@@ -256,10 +254,10 @@ public class ContatoWindow extends javax.swing.JFrame {
                 if (jRadioButton2.isSelected()) {
                     jLabel6.setVisible(true);
                     jLabel6.setText("Email");
-                    jTextFieldEmail.setVisible(true);
+                    jTextFieldRedeSocial.setVisible(true);
                 } else if(!jRadioButton2.isSelected()) {
                     jLabel6.setVisible(false);
-                    jTextFieldEmail.setVisible(false);
+                    jTextFieldRedeSocial.setVisible(false);
                 }
             }
         });
@@ -270,10 +268,10 @@ public class ContatoWindow extends javax.swing.JFrame {
                 if (jRadioButton3.isSelected()) {
                     jLabel6.setVisible(true);
                     jLabel6.setText("Instagram");
-                    jTextFieldInstagram.setVisible(true);
+                    jTextFieldRedeSocial.setVisible(true);
                 } else if(!jRadioButton3.isSelected()) {
                     jLabel6.setVisible(false);
-                    jTextFieldInstagram.setVisible(false);
+                    jTextFieldRedeSocial.setVisible(false);
                 }
             }
         });
@@ -301,7 +299,7 @@ public class ContatoWindow extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldRedeSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -340,7 +338,7 @@ public class ContatoWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldRedeSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(0, 8, Short.MAX_VALUE))
@@ -361,17 +359,11 @@ public class ContatoWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                           
 
-    private void jTextFieldWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void jTextFieldRedeSocialActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     } 
     
-    private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    } 
-
-    private void jTextFieldInstagramActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-    } 
+    
 
     /**
      * @param args the command line arguments
@@ -422,9 +414,8 @@ public class ContatoWindow extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextFieldWhatsApp;    
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldInstagram;
+    private javax.swing.JTextField jTextFieldRedeSocial;    
+    
 
 
     // End of variables declaration                   
