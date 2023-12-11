@@ -35,7 +35,8 @@ public class EditarContatoGUICommand implements Command {
         String telefoneStr = telefone.getText();
         String aniversarioStr = aniversario.getText();
 
-        GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
+        GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        
+        GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
 
         GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
