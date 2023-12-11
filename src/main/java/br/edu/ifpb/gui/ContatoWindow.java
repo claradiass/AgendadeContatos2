@@ -240,7 +240,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         mainWindow.updateContactList();
 
         // Close the ContatoWindow
-        setVisible(false);
+        // setVisible(false);
                     }
 
                 

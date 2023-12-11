@@ -51,11 +51,15 @@ public class AdicionarContatoGUICommand implements Command {
         String telefoneStr = telefone.getText();
         String aniversarioStr = aniversario.getText();
 
+        
+
         GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());
         GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
-        // GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
-        // GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());
-        
+        GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
+
+        // GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());
+
+        GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());
         GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
 
@@ -66,24 +70,14 @@ public class AdicionarContatoGUICommand implements Command {
             valorDaEntradaValidator = new GUITextValidator(new UserValidator(false));
         }
 
+
         boolean nomeIsValid = nomeValidator.validate(nome);
         boolean sobrenomeIsValid = sobrenomeValidator.validate(sobrenome);
-        boolean telefoneIsValid = telefoneValidator.validate(telefone);
-        boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
         // boolean categoriaIsValid = categoriaValidator.validate(categoria);
         boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
         // boolean redeSocialIsValid = redeSocialValidator.validate(redeSocial);
-        
-        // Verificação adicional para campos em branco
-        if (nomeStr.isEmpty() || sobrenomeStr.isEmpty() || valorDaEntradaStr.isEmpty() || telefoneStr.isEmpty() || aniversarioStr.isEmpty()) {
-            JOptionPane.showMessageDialog(nome.getParent(), "Preencha todos os campos antes de continuar.");
-            return;  // Retorna se algum campo estiver em branco
-        }
-        // Verificação para pelo menos um RadioButton de rede social e um RadioButton de categoria selecionados
-        // if (redeSocialGroup.getSelection() == null || (!radioCategoria1.isSelected() && !radioCategoria2.isSelected())) {
-        //     JOptionPane.showMessageDialog(nome.getParent(), "Selecione pelo menos um RadioButton de rede social e um RadioButton de categoria.");
-        //     return;  // Retorna se as condições não forem atendidas
-        // }
+        boolean telefoneIsValid = telefoneValidator.validate(telefone);
+        boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
 
         if (nomeIsValid && sobrenomeIsValid && valorDaEntradaIsValid  && telefoneIsValid && aniversarioIsValid) {
             JOptionPane.showMessageDialog(nome.getParent(), "Contato adicionado com sucesso.");
@@ -91,4 +85,3 @@ public class AdicionarContatoGUICommand implements Command {
         }
     }
 }
-
