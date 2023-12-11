@@ -1,6 +1,6 @@
 Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario
 Maria,Eduarda,false,false,Pessoal,eduarda@gmail.com,Email,(83)99141-5847,18/08/2004
-Ana,Clara,false,true,Favoritos,@clara,Instagram,(83)88888-8888,33/33/3333
+Ana,ANa,false,false,Pessoal,uma@uma,Email,(83)88888-8888,33/33/3333
 Heloísa,Galdino,false,true,Favoritos,@helo_gatinha,Instagram,(87)98765-1927,30/12/2011
 Teste1,ee,true,true,Favoritos,,WhatsApp,(11)11111-1111,09/09/0909
 dkdk,djdd,true,true,Pessoal,,WhatsApp,(87)86485-4657,34/34/3434
@@ -8,5 +8,5 @@ AAAAAAAA,SSSSSSS,true,false,Pessoal,cueed@gmail,Email,(99)23451-1234,12/12/1212
 AAAAAAAA,AADDDDDDD,true,false,Pessoal,udb,Email,(99)25443-3544,12/12/1212
 Suemilton,blabla,false,false,Trabalho,WhatsApp,Instagram,(87)86485-4444,34/34/3434
 Josefa,ajsfkaj,false,false,Trabalho,hrtiurth,Email,(83)33993-0000,33/33/3333
-Josefinha,Araujo,false,false,Favoritos,Email,Email,(83)33993-0055,33/44/3355
+Maria,souto,false,false,Pessoal,Email,Email,(83)99141-5847,18/08/2004
 Josezinho,tantan,false,false,Pessoal,manda,Email,(83)88334-0000,44/55/7766
