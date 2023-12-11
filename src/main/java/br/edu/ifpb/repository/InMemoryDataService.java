@@ -19,11 +19,21 @@ public class InMemoryDataService implements DataService {
         return contatos;
     }
 
+    // @Override
+    // public void update(Contato c) {
+    //     int index = contatos.indexOf(c);
+    //     contatos.set(index, c);
+    // }
+
     @Override
-    public void update(Contato c) {
-        int index = contatos.indexOf(c);
+public void update(Contato c) {
+    int index = contatos.indexOf(c);
+    if (index != -1) {
         contatos.set(index, c);
+    } else {
+        throw new IllegalArgumentException("Contato não encontrado na lista");
     }
+}
 
     @Override
     public List<Contato> search(String termo) {

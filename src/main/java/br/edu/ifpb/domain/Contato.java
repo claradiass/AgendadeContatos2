@@ -32,14 +32,28 @@ public class Contato implements Serializable {
         this.aniversario = aniversario;
     }
 
+    // @Override
+    // public boolean equals(Object obj) {
+    //     if (this == obj) return true;
+    //     if (obj == null || getClass() != obj.getClass()) return false;
+    //     Contato contato = (Contato) obj;
+    //     return Objects.equals(this.valorDaEntrada, contato.valorDaEntrada);
+    //         // compara se o contato tem o mesmo tipo de entrada e o mesmo valor da entrada
+    // }
+
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Contato contato = (Contato) obj;
-        return Objects.equals(this.valorDaEntrada, contato.valorDaEntrada);
-            // compara se o contato tem o mesmo tipo de entrada e o mesmo valor da entrada
+public boolean equals(Object obj) {
+    if (this == obj) {
+        return true;
     }
+    if (obj == null || getClass() != obj.getClass()) {
+        return false;
+    }
+    Contato contato = (Contato) obj;
+    return getTelefone().equals(contato.getTelefone());
+}
+
+    
 
     // public String toString() {
     //     return "Nome:" + getNome() + "\nSobrenome:" + getSobrenome() + "\nTelefone:" + getTelefone() + "\nRecebe Ligação?" + isLigacao() + "\nEssa ligação pode ser uma chamada de vídeo?" + 

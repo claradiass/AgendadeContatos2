@@ -89,6 +89,20 @@ public class AdicionarContatoGUICommand implements Command {
             JOptionPane.showMessageDialog(nome.getParent(), "Contato adicionado com sucesso.");
             service.criar(nomeStr, sobrenomeStr, ligacao, chamadaVideo, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
         }
+
+        // try {
+        //     if (nomeIsValid && sobrenomeIsValid && valorDaEntradaIsValid && telefoneIsValid && aniversarioIsValid) {
+        //         // Se o código dentro deste bloco lançar uma exceção, ela será capturada pelos blocos catch abaixo.
+        //         JOptionPane.showMessageDialog(nome.getParent(), "Contato adicionado com sucesso.");
+        //         service.criar(nomeStr, sobrenomeStr, ligacao, chamadaVideo, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
+        //     } else {
+        //         // Adicione aqui qualquer código que você queira executar em caso de falha nas validações acima.
+        //     }
+        // } catch (Exception e) {
+        //     // Esta parte será executada se ocorrer qualquer exceção dentro do bloco try.
+        //     e.printStackTrace(); // Isso imprime o rastreamento da pilha, o que é útil para depuração.
+        //     JOptionPane.showMessageDialog(nome.getParent(), "Ocorreu um erro ao adicionar o contato. Consulte o console para obter mais detalhes.");
+        // }
     }
 }
 
