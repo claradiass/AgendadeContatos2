@@ -10,6 +10,7 @@ import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 
 import main.java.br.edu.ifpb.commands.AdicionarContatoGUICommand;
 import main.java.br.edu.ifpb.commands.CommandExecutor;
+import main.java.br.edu.ifpb.commands.EditarContatoGUICommand;
 import main.java.br.edu.ifpb.domain.Contato;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -227,20 +228,30 @@ public class ContatoWindow extends javax.swing.JFrame {
                             chamadaVideo = true;
                         }
                         
-                
+                        if(contato == null){
                         // Execute o comando para adicionar o contato
-                        commandExecutor.executeCommand(
-                            new AdicionarContatoGUICommand(
-        jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
-        jTextField7, redeSocial, jTextField4, jTextField6
-    )
-
-                        );   
-                    // Update the contact list in MainWindow
-        mainWindow.updateContactList();
+                            commandExecutor.executeCommand(
+                                new AdicionarContatoGUICommand(
+                                jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
+                                jTextField7, redeSocial, jTextField4, jTextField6
+                                )
+                            );
+                            mainWindow.updateContactList();
+                            setVisible(false);
+                        }else if(contato != null){
+                            commandExecutor.executeCommand(
+                                new EditarContatoGUICommand(
+                                jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
+                                jTextField7, redeSocial, jTextField4, jTextField6)
+                            );
+                            
+                            mainWindow.updateContactList();
+                            setVisible(false);
+                        }  
+                
 
         // Close the ContatoWindow
-        // setVisible(false);
+        //setVisible(false);
                     }
 
                 

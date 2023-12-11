@@ -16,24 +16,32 @@ import java.util.regex.Pattern;
 public class EditarContatoGUICommand implements Command {
     private final JTextField nome;
     private final JTextField sobrenome;
-    private final JTextField telefone;        
-    private final JTextField aniversario;
-    private final JRadioButton redeSocial;
+    private final Boolean ligacao;
+    private final Boolean chamadaVideo;
+    private final String categoria;
     private final JTextField valorDaEntrada;
-    private final JRadioButton categoria;
+    private final String redeSocial;
+    private final JTextField telefone;
+    private final JTextField aniversario;
 
-    private final JFrame frame;
+    
+
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
-    public EditarContatoGUICommand(JFrame frame, JTextField nome, JTextField sobrenome, JTextField telefone, JTextField aniversario, JRadioButton redeSocial, JRadioButton categoria, JTextField valorDaEntrada) {
-        this.frame = frame;
+    public EditarContatoGUICommand(JTextField nome, JTextField sobrenome, Boolean ligacao,
+    Boolean chamadaVideo, String categoria, JTextField valorDaEntrada,
+    String redeSocial, JTextField telefone, JTextField aniversario) {
+        
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.telefone = telefone;
-        this.aniversario = aniversario;
-        this.redeSocial = redeSocial;
+        this.ligacao = ligacao;
+        this.chamadaVideo = chamadaVideo;
         this.categoria = categoria;
         this.valorDaEntrada = valorDaEntrada;
+        this.redeSocial = redeSocial;
+        this.telefone = telefone;
+        this.aniversario = aniversario;
+    
     }
     @Override
     public void execute() {
@@ -41,9 +49,9 @@ public class EditarContatoGUICommand implements Command {
         String sobrenomeStr = sobrenome.getText();        
         String telefoneStr = telefone.getText();
         String aniversarioStr = aniversario.getText();
-        String redeSocialStr = redeSocial.getText();
-        String categoriaStr = categoria.getText();
         String valorDaEntradaStr = valorDaEntrada.getText();
+        String redeSocialStr = redeSocial;
+        String categoriaStr = categoria;
         
 
         GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        
@@ -63,27 +71,8 @@ public class EditarContatoGUICommand implements Command {
 
 
         if (nomeIsValid && sobrenomeIsValid && telefoneIsValid && aniversarioIsValid && valorDaEntradaIsValid) {
-            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            String telefonePattern = "\\(\\d{2}\\)\\d{5}-\\d{4}";
-            Pattern pattern = Pattern.compile(telefonePattern);
-            Matcher matcher = pattern.matcher(telefoneStr);
-        
-            nome.setText("");
-            sobrenome.setText("");
-            telefone.setText("");
-            aniversario.setText("");
-            valorDaEntrada.setText("");
-            frame.setVisible(false);
-        
-            try {
-                service.editar(nomeStr, sobrenomeStr, false, false, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
-                JOptionPane.showMessageDialog(nome.getParent(), "Contato editado com sucesso.");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(frame, "Erro ao converter a data. Certifique-se de que a data esteja no formato dd/MM/yyyy.");
-                e.printStackTrace();
-                return;
-                // Adicione um return ou outra lógica apropriada aqui se desejar interromper a execução após a exceção.
+            service.editar(nomeStr, sobrenomeStr, false, false, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
+            JOptionPane.showMessageDialog(nome.getParent(), "Contato editado com sucesso.");
             }
         }
     }
-}
