@@ -65,6 +65,13 @@ public class MainWindow extends javax.swing.JFrame {
         });
     }
 
+    public void updateContactList() {
+        // Add logic to update the contact list in MainWindow
+        // For example, if you have a method named refreshContactsList() in MainWindow:
+        atualizarListaDeContatos();
+    }
+    
+
     private void updateContactDetails(Contato contato) {
         if (contato != null) {
             StringBuilder details = new StringBuilder("<html>");

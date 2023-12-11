@@ -22,11 +22,16 @@ public class ContatoWindow extends javax.swing.JFrame {
     private ImagePanel imagePanel;
     private ButtonGroup buttonGroup;
     private Contato contato;
+    private CommandExecutor commandExecutor;
+    private MainWindow mainWindow;
+
     /**
      * Creates new form ContatoWindow
      */
     public ContatoWindow(MainWindow main, Contato contato) {
         this.contato = contato;
+        this.commandExecutor = new CommandExecutor();
+        this.mainWindow = main;
 
         CommandExecutor commandExecutor = new CommandExecutor();
         imagePanel = new ImagePanel("Blue wallpaper.png");
@@ -71,6 +76,9 @@ public class ContatoWindow extends javax.swing.JFrame {
         }
         
     }
+
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,6 +196,56 @@ public class ContatoWindow extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(170, 213, 248));
         jButton1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(33, 50, 78));
+        jButton1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Valores de teste para os campos específicos
+                        boolean ligacao = false;
+                        boolean chamadaVideo = false;
+                        
+                        String categoriaSelecionada = "";
+                        if (jRadioButton1.isSelected()) {
+                            categoriaSelecionada = "Favoritos";
+                        } else if (jRadioButton2.isSelected()) {
+                            categoriaSelecionada = "Trabalho";
+                        } else if (jRadioButton3.isSelected()) {
+                            categoriaSelecionada = "Pessoal";
+                        }
+
+                        String redeSocial = "";
+                        if (jRadioButton6.isSelected()) {
+                            redeSocial = "WhatsApp";
+                            ligacao = true;
+                            chamadaVideo = true;
+                        } else if (jRadioButton4.isSelected()) {
+                            redeSocial = "Email";
+                            ligacao = false;
+                            chamadaVideo = false;
+                        } else if (jRadioButton5.isSelected()) {
+                            redeSocial = "Instagram";
+                            ligacao = false;
+                            chamadaVideo = true;
+                        }
+                        
+                
+                        // Execute o comando para adicionar o contato
+                        commandExecutor.executeCommand(
+                            new AdicionarContatoGUICommand(
+        jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
+        jTextField7, redeSocial, jTextField4, jTextField6
+    )
+
+                        );   
+                    // Update the contact list in MainWindow
+        mainWindow.updateContactList();
+
+        // Close the ContatoWindow
+        setVisible(false);
+                    }
+
+                
+                });
+
 
         jButton2.setText("Cancelar");
         jButton2.setBackground(new java.awt.Color(170, 213, 248));
@@ -207,7 +265,8 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton5.setLabel("Instagram");        
+        jRadioButton5.setLabel("Instagrtrue\n" + //
+                "trueam");        
         jRadioButton4.setLabel("Email");
         jRadioButton6.setLabel("WhatsApp");
 
@@ -427,7 +486,7 @@ public class ContatoWindow extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
-
+    
     /**
      * @param args the command line arguments
      */
