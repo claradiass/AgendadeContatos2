@@ -35,7 +35,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         this.mainWindow = main;
 
         CommandExecutor commandExecutor = new CommandExecutor();
-        imagePanel = new ImagePanel("Blue wallpaper.png");
+        imagePanel = new ImagePanel("../Imagens/Blue wallpaper.png");
         setContentPane(imagePanel);
         initComponents();
         setLocationRelativeTo(null);
