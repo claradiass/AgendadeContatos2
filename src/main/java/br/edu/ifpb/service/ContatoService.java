@@ -34,7 +34,7 @@ public class ContatoService {
         repository.remove(c);
     }
 
-    public void editar(String nome, String sobrenome, boolean ligacao, boolean chamadaVideo, String categoria, String valorDaEntrada, String redeSocial, String telefone, String aniversario){
+    public void editar(String nome, String sobrenome, boolean ligacao, boolean chamadaVideo, String categoria, String valorDaEntrada, String redeSocial, String telefone, String aniversario) {
         repository.update(new Contato(nome, sobrenome, ligacao, chamadaVideo, categoria, valorDaEntrada, redeSocial, telefone, aniversario));
     }
 
