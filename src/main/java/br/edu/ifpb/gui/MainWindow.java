@@ -19,7 +19,7 @@ public class MainWindow extends javax.swing.JFrame {
         private JList<Contato> list;
 
     public MainWindow() {
-        imagePanel = new ImagePanel("Blue wallpaper.png");
+        imagePanel = new ImagePanel("../Imagens/Blue wallpaper.png");
         setContentPane(imagePanel);
         initComponents();
         initContactListListener();

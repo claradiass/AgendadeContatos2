@@ -53,6 +53,7 @@ public class EditarContatoGUICommand implements Command {
         String redeSocialStr = redeSocial;
         String categoriaStr = categoria;
         
+        
 
         GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        
         GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());

@@ -35,7 +35,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         this.mainWindow = main;
 
         CommandExecutor commandExecutor = new CommandExecutor();
-        imagePanel = new ImagePanel("Blue wallpaper.png");
+        imagePanel = new ImagePanel("../Imagens/Blue wallpaper.png");
         setContentPane(imagePanel);
         initComponents();
         setLocationRelativeTo(null);
@@ -55,24 +55,24 @@ public class ContatoWindow extends javax.swing.JFrame {
             // Lógica para determinar a rede social do contato
             if (contato.getCategoria().equals("Favoritos")) {
                 jRadioButton1.setSelected(true);
-                jTextField7.setText(contato.getCategoria());
+                // jTextField7.setText(contato.getCategoria());
             } else if (contato.getCategoria().equals("Trabalho")) {
                 jRadioButton2.setSelected(true);
-                jTextField7.setText(contato.getCategoria());
+                // jTextField7.setText(contato.getCategoria());
             } else if (contato.getCategoria().equals("Pessoal")) {
                 jRadioButton3.setSelected(true);
-                jTextField7.setText(contato.getCategoria());
+                // jTextField7.setText(contato.getCategoria());
             }
 
             if (contato.getRedeSocial().equals("WhatsApp")) {
                 jRadioButton5.setSelected(true);
-                jTextField7.setText(contato.getRedeSocial());
+                jTextField7.setText(contato.getValorDaEntrada());
             } else if (contato.getRedeSocial().equals("Email")) {
                 jRadioButton4.setSelected(true);
-                jTextField7.setText(contato.getRedeSocial());
+                jTextField7.setText(contato.getValorDaEntrada());
             } else if (contato.getRedeSocial().equals("Instagram")) {
                 jRadioButton5.setSelected(true);
-                jTextField7.setText(contato.getRedeSocial());
+                jTextField7.setText(contato.getValorDaEntrada());
             }
         }
         
@@ -126,9 +126,18 @@ public class ContatoWindow extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(400, 520));
         setMinimumSize(new java.awt.Dimension(400, 520));
         setPreferredSize(new java.awt.Dimension(400, 520));
-        setTitle("Adicionar Contato");
 
-        jLabel1.setText("Adicionar Contato");
+        if (contato != null) {
+            setTitle("Editar Contato");
+            jLabel1.setText("Editar Contato");
+            jButton1.setText("Editar"); // Altera o texto do botão conforme a ação desejada
+        } else {
+            setTitle("Adicionar Contato");
+            jLabel1.setText("Adicionar Contato");
+            jButton1.setText("Adicionar");
+        }
+        
+
         jLabel1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 50, 78));
         
@@ -193,10 +202,10 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText(contato == null ? "Adicionar" : "Editar");
-jButton1.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
+        // jButton1.setText(contato == null ? "Adicionar" : "Editar");
+        jButton1.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
         // Valores de teste para os campos específicos
         boolean ligacao = false;
         boolean chamadaVideo = false;
