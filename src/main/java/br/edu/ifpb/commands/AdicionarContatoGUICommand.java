@@ -170,7 +170,7 @@ public class AdicionarContatoGUICommand implements Command {
         // GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
         // GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());
         
-        GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
+        GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(true));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
 
         GUITextValidator valorDaEntradaValidator = null;
