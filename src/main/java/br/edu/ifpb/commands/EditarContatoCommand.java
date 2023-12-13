@@ -75,7 +75,7 @@ public class EditarContatoCommand implements Command{
 
         //Temos que fazer essa validação
         strValidationContext.setValidator(new OpcionalDateValidator());
-        String dataStr = strValidationContext.getValidValue("Digite uma nova data de nascimento (ou deixe vazio para não mudar): ", "Formato de data incorreto, use o formato 'dd/MM/yyyy'", String.class);
+        String dataStr = strValidationContext.getValidValue("Digite uma nova data de nascimento (ou deixe vazio para não mudar): ", "Formato de data incorreto, use o formato 'dd/MM/yyyy' e adicione apenas números.", String.class);
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
         System.out.print("Digite uma nova categoria (ou deixe vazio para não mudar): ");
