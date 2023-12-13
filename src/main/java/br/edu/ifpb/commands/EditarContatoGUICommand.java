@@ -60,7 +60,8 @@ public class EditarContatoGUICommand implements Command {
 
         GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
-        GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());        GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());       
+        GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());        
+        GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());       
         GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
 
 
@@ -76,4 +77,6 @@ public class EditarContatoGUICommand implements Command {
             JOptionPane.showMessageDialog(nome.getParent(), "Contato editado com sucesso.");
             }
         }
+
+        
     }

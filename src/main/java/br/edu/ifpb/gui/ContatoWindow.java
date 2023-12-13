@@ -55,13 +55,10 @@ public class ContatoWindow extends javax.swing.JFrame {
             // Lógica para determinar a rede social do contato
             if (contato.getCategoria().equals("Favoritos")) {
                 jRadioButton1.setSelected(true);
-                // jTextField7.setText(contato.getCategoria());
             } else if (contato.getCategoria().equals("Trabalho")) {
                 jRadioButton2.setSelected(true);
-                // jTextField7.setText(contato.getCategoria());
             } else if (contato.getCategoria().equals("Pessoal")) {
                 jRadioButton3.setSelected(true);
-                // jTextField7.setText(contato.getCategoria());
             }
 
             if (contato.getRedeSocial().equals("WhatsApp")) {

@@ -82,38 +82,37 @@ public class EditarContatoCommand implements Command{
         String categoria = new Scanner(System.in).nextLine();
 
 
-      if (!nome.equals("")) {
-          toEdit.setNome(nome);
-      }
+        if (!nome.equals("")) {
+            toEdit.setNome(nome);
+        }
 
-      if (!sobrenome.equals("")) {
-          toEdit.setSobrenome(sobrenome);
-      }
+        if (!sobrenome.equals("")) {
+            toEdit.setSobrenome(sobrenome);
+        }
 
-      if (!telefone.equals("")) {
-          toEdit.setTelefone(telefone);
-      }
+        if (!telefone.equals("")) {
+            toEdit.setTelefone(telefone);
+        }
 
-      if (!redeSocial.equals("")) {
-          toEdit.setRedeSocial(redeSocial);
-      }
+        if (!redeSocial.equals("")) {
+            toEdit.setRedeSocial(redeSocial);
+        }
 
-      if (!valorDaEntrada.equals("")) {
-          toEdit.setValorDaEntrada(valorDaEntrada);;
-      }
+        if (!valorDaEntrada.equals("")) {
+            toEdit.setValorDaEntrada(valorDaEntrada);;
+        }
 
-      if (!dataStr.equals("")) {
-        toEdit.setAniversario(dataStr);
-      }
-
-
-      if (!categoria.equals("")) {
-          toEdit.setCategoria(categoria);
-      }
+        if (!dataStr.equals("")) {
+            toEdit.setAniversario(dataStr);
+        }
 
 
-      contatoService.editar(toEdit.getNome(), toEdit.getSobrenome(), toEdit.isLigacao(), toEdit.isChamadaVideo(), toEdit.getCategoria(), toEdit.getValorDaEntrada(), toEdit.getRedeSocial(), toEdit.getTelefone(), toEdit.getAniversario());
-      System.out.println(GREEN + "\nContato editado" + RESET);
-  }
-  }
-  
+        if (!categoria.equals("")) {
+            toEdit.setCategoria(categoria);
+        }
+
+
+        contatoService.editar(toEdit.getNome(), toEdit.getSobrenome(), toEdit.isLigacao(), toEdit.isChamadaVideo(), toEdit.getCategoria(), toEdit.getValorDaEntrada(), toEdit.getRedeSocial(), toEdit.getTelefone(), toEdit.getAniversario());
+        System.out.println(GREEN + "\nContato editado" + RESET);
+    }
+}
