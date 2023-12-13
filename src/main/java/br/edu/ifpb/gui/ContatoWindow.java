@@ -65,16 +65,20 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
 
             if (contato.getRedeSocial().equals("WhatsApp")) {
-                jRadioButton5.setSelected(true);
-                jTextField7.setText(contato.getValorDaEntrada());
+                jRadioButton6.setSelected(true);
+                jTextField7.setVisible(false);
             } else if (contato.getRedeSocial().equals("Email")) {
                 jRadioButton4.setSelected(true);
                 jTextField7.setText(contato.getValorDaEntrada());
+                jTextField7.setVisible(true);
             } else if (contato.getRedeSocial().equals("Instagram")) {
                 jRadioButton5.setSelected(true);
                 jTextField7.setText(contato.getValorDaEntrada());
+                jTextField7.setVisible(true);
             }
         }
+            
+        
         
     }
 
@@ -377,12 +381,11 @@ public class ContatoWindow extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (jRadioButton6.isSelected()) {
-                    jLabel8.setVisible(true);
-                    jLabel8.setText("WhatsApp");
-                    jTextField7.setVisible(true);
+                    jRadioButton6.setSelected(true);
                 } else if(!jRadioButton6.isSelected()) {
                     jLabel8.setVisible(false);
                     jTextField7.setVisible(false);
+                    
                 }
             }
         });
