@@ -10,6 +10,8 @@ public class GUITextValidator implements GUIValidator {
         this.validator = validator;
     }
 
+    
+
     @Override
     public boolean validate(JTextComponent field) {
         boolean textIsValid = getStringValidator().validate(field.getText());
