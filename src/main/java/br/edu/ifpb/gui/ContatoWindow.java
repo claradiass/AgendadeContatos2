@@ -199,57 +199,56 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
+        JFrame thisWindow = this;
         // jButton1.setText(contato == null ? "Adicionar" : "Editar");
         jButton1.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        // Valores de teste para os campos específicos
-        boolean ligacao = false;
-        boolean chamadaVideo = false;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Valores de teste para os campos específicos
+                boolean ligacao = false;
+                boolean chamadaVideo = false;
 
-        String categoriaSelecionada = "";
-        if (jRadioButton1.isSelected()) {
-            categoriaSelecionada = "Favoritos";
-        } else if (jRadioButton2.isSelected()) {
-            categoriaSelecionada = "Trabalho";
-        } else if (jRadioButton3.isSelected()) {
-            categoriaSelecionada = "Pessoal";
-        }
+                String categoriaSelecionada = "";
+                if (jRadioButton1.isSelected()) {
+                    categoriaSelecionada = "Favoritos";
+                } else if (jRadioButton2.isSelected()) {
+                    categoriaSelecionada = "Trabalho";
+                } else if (jRadioButton3.isSelected()) {
+                    categoriaSelecionada = "Pessoal";
+                }
 
-        String redeSocial = "";
-        if (jRadioButton6.isSelected()) {
-            redeSocial = "WhatsApp";
-            ligacao = true;
-            chamadaVideo = true;
-        } else if (jRadioButton4.isSelected()) {
-            redeSocial = "Email";
-            ligacao = false;
-            chamadaVideo = false;
-        } else if (jRadioButton5.isSelected()) {
-            redeSocial = "Instagram";
-            ligacao = false;
-            chamadaVideo = true;
-        }
+                String redeSocial = "";
+                if (jRadioButton6.isSelected()) {
+                    redeSocial = "WhatsApp";
+                    ligacao = true;
+                    chamadaVideo = true;
+                } else if (jRadioButton4.isSelected()) {
+                    redeSocial = "Email";
+                    ligacao = false;
+                    chamadaVideo = false;
+                } else if (jRadioButton5.isSelected()) {
+                    redeSocial = "Instagram";
+                    ligacao = false;
+                    chamadaVideo = true;
+                }
 
-        if (contato == null) {
-            // Execute o comando para adicionar o contato
-            commandExecutor.executeCommand(new AdicionarContatoGUICommand(
-                    jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
-                    jTextField7, redeSocial, jTextField4, jTextField6
-            ));
-            mainWindow.updateContactList();
-            setVisible(false);
-        } else if (contato != null) {
-            // Execute o comando para editar o contato existente
-            commandExecutor.executeCommand(new EditarContatoGUICommand(
-                    jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
-                    jTextField7, redeSocial, jTextField4, jTextField6
-            ));
-            mainWindow.updateContactList();
-            setVisible(false);
-        }
-    }
-});
+                if (contato == null) {
+                    // Execute o comando para adicionar o contato
+                    commandExecutor.executeCommand(new AdicionarContatoGUICommand(thisWindow,
+                            jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
+                            jTextField7, redeSocial, jTextField4, jTextField6
+                    ));
+                    mainWindow.updateContactList();
+                } else if (contato != null) {
+                    // Execute o comando para editar o contato existente
+                    commandExecutor.executeCommand(new EditarContatoGUICommand(thisWindow,
+                            jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
+                            jTextField7, redeSocial, jTextField4, jTextField6
+                    ));
+                    mainWindow.updateContactList();
+                }
+            }
+        });
 
 
 

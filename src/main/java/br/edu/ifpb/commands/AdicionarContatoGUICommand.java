@@ -134,12 +134,14 @@ public class AdicionarContatoGUICommand implements Command {
     private final String redeSocial;
     private final JTextField telefone;
     private final JTextField aniversario;
+    private final JFrame parent;
 
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
-    public AdicionarContatoGUICommand(JTextField nome, JTextField sobrenome, Boolean ligacao,
+    public AdicionarContatoGUICommand(JFrame parent, JTextField nome, JTextField sobrenome, Boolean ligacao,
                                     Boolean chamadaVideo, String categoria, JTextField valorDaEntrada,
                                     String redeSocial, JTextField telefone, JTextField aniversario) {
+        this.parent = parent;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.ligacao = ligacao;
@@ -183,7 +185,7 @@ public class AdicionarContatoGUICommand implements Command {
         boolean telefoneIsValid = telefoneValidator.validate(telefone);
         boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
         // boolean categoriaIsValid = categoriaValidator.validate(categoria);
-        boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
+        boolean valorDaEntradaIsValid = valorDaEntradaValidator == null ? true : valorDaEntradaValidator.validate(valorDaEntrada);
         // boolean redeSocialIsValid = redeSocialValidator.validate(redeSocial);
         
         // Verificação adicional para campos em branco
@@ -200,6 +202,7 @@ public class AdicionarContatoGUICommand implements Command {
         if (nomeIsValid && sobrenomeIsValid && valorDaEntradaIsValid  && telefoneIsValid && aniversarioIsValid) {
             JOptionPane.showMessageDialog(nome.getParent(), "Contato adicionado com sucesso.");
             service.criar(nomeStr, sobrenomeStr, ligacao, chamadaVideo, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
+            parent.setVisible(false);
         }
     }
 }

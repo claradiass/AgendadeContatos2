@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EditarContatoGUICommand implements Command {
+    private final JFrame parent;
     private final JTextField nome;
     private final JTextField sobrenome;
     private final Boolean ligacao;
@@ -28,10 +29,10 @@ public class EditarContatoGUICommand implements Command {
 
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
-    public EditarContatoGUICommand(JTextField nome, JTextField sobrenome, Boolean ligacao,
+    public EditarContatoGUICommand(JFrame parent, JTextField nome, JTextField sobrenome, Boolean ligacao,
     Boolean chamadaVideo, String categoria, JTextField valorDaEntrada,
     String redeSocial, JTextField telefone, JTextField aniversario) {
-        
+        this.parent = parent;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.ligacao = ligacao;
@@ -71,12 +72,15 @@ public class EditarContatoGUICommand implements Command {
         boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
         boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
 
-
         if (nomeIsValid && sobrenomeIsValid && telefoneIsValid && aniversarioIsValid && valorDaEntradaIsValid) {
             service.editar(nomeStr, sobrenomeStr, false, false, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
             JOptionPane.showMessageDialog(nome.getParent(), "Contato editado com sucesso.");
-            }
+            nome.setText("");
+            sobrenome.setText("");
+            telefone.setText("");
+            parent.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Corrija os campos inválidos antes de continuar.");
         }
-
-        
-    }
+    }        
+}

@@ -1,9 +1,6 @@
 Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario
-<<<<<<< HEAD
-Maria,Eduarda,false,false,Pessoal,eduarda@gmail.com,Email,(83)99141-5847,12/12/1212
-=======
+Maria,Eduarda,false,false,Pessoal,Email,Email,(83)99141-5847,18/08/2004
 Maria,Eduarda,false,false,Pessoal,Email,Email,(83)99141-5847,18/08/2004u
->>>>>>> 18807c2b6ee4f587463d73583696d6aab3c6612d
 Ana,ANa,false,false,Pessoal,uma@uma,Email,(83)88888-8888,33/33/3333
 Heloísa,Galdino,false,false,Favoritos,@helo_gatinha,Instagram,(87)98765-1927,30/12/20kk
 Teste1,ee,true,true,Favoritos,,WhatsApp,(11)11111-1111,09/09/0909
