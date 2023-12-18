@@ -25,6 +25,8 @@ public class ContatoWindow extends javax.swing.JFrame {
     private Contato contato;
     private CommandExecutor commandExecutor;
     private MainWindow mainWindow;
+    private ButtonGroup redeSocialGroup;
+
 
     /**
      * Creates new form ContatoWindow
@@ -33,6 +35,8 @@ public class ContatoWindow extends javax.swing.JFrame {
         this.contato = contato;
         this.commandExecutor = new CommandExecutor();
         this.mainWindow = main;
+        redeSocialGroup = new ButtonGroup();
+
 
         CommandExecutor commandExecutor = new CommandExecutor();
         imagePanel = new ImagePanel("../Imagens/Blue wallpaper.png");

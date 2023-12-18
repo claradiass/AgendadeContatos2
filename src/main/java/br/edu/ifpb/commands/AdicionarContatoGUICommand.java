@@ -165,6 +165,8 @@ public class AdicionarContatoGUICommand implements Command {
         String telefoneStr = telefone.getText();
         String aniversarioStr = aniversario.getText();
 
+    
+
         GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());
         GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
         // GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());

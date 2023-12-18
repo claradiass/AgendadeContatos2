@@ -124,6 +124,7 @@ public class MainWindow extends javax.swing.JFrame {
         Contato selectedContato = list.getSelectedValue();
         if (selectedContato != null) {
             // Excluir o contato
+            JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
             dataService.remover(selectedContato);
             atualizarListaDeContatos();
             updateContactDetails(null); // Limpar os detalhes após a exclusão
@@ -167,10 +168,10 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Adicione um diálogo de confirmação
-                int option = JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
-                if (option == JOptionPane.YES_OPTION) {
+                // int option = JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
+                // if (option == JOptionPane.YES_OPTION) {
                     excluirContatoSelecionado();
-                }
+                // }
             }
         });
 

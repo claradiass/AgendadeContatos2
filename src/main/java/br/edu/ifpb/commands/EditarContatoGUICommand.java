@@ -3,7 +3,9 @@ package main.java.br.edu.ifpb.commands;
 import main.java.br.edu.ifpb.repository.ContatoRepository;
 import main.java.br.edu.ifpb.service.ContatoService;
 import main.java.br.edu.ifpb.validators.TelefoneValidator;
+import main.java.br.edu.ifpb.validators.UserValidator;
 import main.java.br.edu.ifpb.validators.AniversarioValidator;
+import main.java.br.edu.ifpb.validators.EmailValidator;
 import main.java.br.edu.ifpb.validators.GUITextValidator;
 import main.java.br.edu.ifpb.validators.NonEmptyValidator;
 
@@ -62,8 +64,14 @@ public class EditarContatoGUICommand implements Command {
         GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
         GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());        
-        GUITextValidator valorDaEntradaValidator = new GUITextValidator(new NonEmptyValidator());       
         GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
+
+        GUITextValidator valorDaEntradaValidator = null;
+        if ("Email".equalsIgnoreCase(redeSocialStr)) {
+            valorDaEntradaValidator = new GUITextValidator(new EmailValidator(false));
+        } else if ("Instagram".equalsIgnoreCase(redeSocialStr)) {
+            valorDaEntradaValidator = new GUITextValidator(new UserValidator(false));
+        }
 
 
         boolean nomeIsValid = nomeValidator.validate(nome);
