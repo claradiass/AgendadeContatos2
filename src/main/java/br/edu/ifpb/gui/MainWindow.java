@@ -66,8 +66,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     public void updateContactList() {
-        // Add logic to update the contact list in MainWindow
-        // For example, if you have a method named refreshContactsList() in MainWindow:
         atualizarListaDeContatos();
     }
     
@@ -101,34 +99,32 @@ public class MainWindow extends javax.swing.JFrame {
             jLabel4.setText(details.toString());
     
         } else {
-            // Clear the text in jLabel4 when no contact is selected
             jLabel4.setText("");
             jLabel3.setText("Selecione um contato para ver suas informações");
-            // Limpe outras informações, se necessário
         }
     }
 
     private void editarContatoSelecionado() {
         Contato selectedContato = list.getSelectedValue();
         if (selectedContato != null) {
-            // Abra a janela de edição passando o contato selecionado
             new ContatoWindow(this, selectedContato).show();
         } else {
             JOptionPane.showMessageDialog(MainWindow.this, "Selecione um contato para editar.");
         }
     }
-    
-    
 
     private void excluirContatoSelecionado() {
         Contato selectedContato = list.getSelectedValue();
         if (selectedContato != null) {
             // Excluir o contato
-            JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
-            dataService.remover(selectedContato);
-            atualizarListaDeContatos();
-            updateContactDetails(null); // Limpar os detalhes após a exclusão
-            JOptionPane.showMessageDialog(MainWindow.this, "Contato excluído com sucesso!");
+            int resposta = JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
+            if(resposta == JOptionPane.YES_OPTION){
+                dataService.remover(selectedContato);
+                atualizarListaDeContatos();
+                updateContactDetails(null); // Limpar os detalhes após a exclusão
+                JOptionPane.showMessageDialog(MainWindow.this, "Contato excluído com sucesso!");
+            } 
+            
         } else {
             JOptionPane.showMessageDialog(MainWindow.this, "Selecione um contato para excluir.");
         }
@@ -237,9 +233,6 @@ public class MainWindow extends javax.swing.JFrame {
         // jButton3.setBorder(null);
         // jButton3.setBorderPainted(false);
         jButton3.addActionListener(e -> {
-            // PacienteWindow pode ser aberta para criação ou edição de um paciente
-            // Se paciente for nulo, a janela funcionará para criar um novo
-            // Caso contrário, carregará os dados para editar
             new ContatoWindow(this, null).show();
         });
 
@@ -263,7 +256,6 @@ public class MainWindow extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-
 
         jLabel3.setBackground(new java.awt.Color(33, 50, 78));
         jLabel3.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
@@ -334,13 +326,13 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }                        
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        
     }   
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
+        
     }                                        
 
     /**
