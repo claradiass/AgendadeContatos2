@@ -81,6 +81,7 @@ public class AdicionarContatoGUICommand implements Command {
         boolean sobrenomeIsValid = sobrenomeValidator.validate(sobrenome);
         boolean telefoneIsValid = telefoneValidator.validate(telefone);
         boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
+        boolean valorDaEntradaIsValid = valorDaEntradaValidator == null ? true : valorDaEntradaValidator.validate(valorDaEntrada);
 
         // Verificação adicional para campos em branco
         if (nomeStr.isEmpty() || sobrenomeStr.isEmpty() ||  telefoneStr.isEmpty() || aniversarioStr.isEmpty()  ) {
