@@ -220,9 +220,11 @@ public class ContatoWindow extends javax.swing.JFrame {
 
                 if (contato == null) {
                     commandExecutor.executeCommand(new AdicionarContatoGUICommand(thisWindow,
-                            jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
-                            jTextField7, redeSocial, jTextField4, jTextField6
+                    jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
+                    jTextField7, redeSocial, jTextField4, jTextField6,
+                    jRadioButton1, jRadioButton2, jRadioButton3, jRadioButton6, jRadioButton4, jRadioButton5
                     ));
+                    
                     mainWindow.updateContactList();
                 } else if (contato != null) {
                     commandExecutor.executeCommand(new EditarContatoGUICommand(thisWindow,
@@ -317,10 +319,9 @@ public class ContatoWindow extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton5.setLabel("Instagrtrue\n" + //
-                "trueam");        
-        jRadioButton4.setLabel("Email");
-        jRadioButton6.setLabel("WhatsApp");
+        jRadioButton5.setText("Instagram");        
+        jRadioButton4.setText("Email");
+        jRadioButton6.setText("WhatsApp");
 
         jRadioButton5.addActionListener(new ActionListener() {
             @Override
@@ -329,10 +330,7 @@ public class ContatoWindow extends javax.swing.JFrame {
                     jLabel8.setVisible(true);
                     jLabel8.setText("Instagram");
                     jTextField7.setVisible(true);
-                } else if(!jRadioButton5.isSelected()) {
-                    jLabel8.setVisible(false);
-                    jTextField7.setVisible(false);
-                }
+                } 
             }
         });
 
@@ -343,23 +341,15 @@ public class ContatoWindow extends javax.swing.JFrame {
                     jLabel8.setVisible(true);
                     jLabel8.setText("Email");
                     jTextField7.setVisible(true);
-                } else if(!jRadioButton4.isSelected()) {
-                    jLabel8.setVisible(false);
-                    jTextField7.setVisible(false);
-                }
+                } 
             }
         });
 
         jRadioButton6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (jRadioButton6.isSelected()) {
-                    jRadioButton6.setSelected(true);
-                } else if(!jRadioButton6.isSelected()) {
-                    jLabel8.setVisible(false);
-                    jTextField7.setVisible(false);
-                    
-                }
+                jLabel8.setVisible(false);
+                jTextField7.setVisible(false);
             }
         });
 

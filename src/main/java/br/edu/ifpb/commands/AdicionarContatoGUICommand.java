@@ -113,6 +113,8 @@
 package main.java.br.edu.ifpb.commands;
 
 import javax.swing.*;
+import java.awt.Color;
+
 
 import main.java.br.edu.ifpb.repository.ContatoRepository;
 import main.java.br.edu.ifpb.service.ContatoService;
@@ -136,11 +138,21 @@ public class AdicionarContatoGUICommand implements Command {
     private final JTextField aniversario;
     private final JFrame parent;
 
+    private final JRadioButton favoritosRadioButton;
+    private final JRadioButton trabalhoRadioButton;
+    private final JRadioButton pessoalRadioButton;
+
+    private final JRadioButton whatsappRadioButton;
+    private final JRadioButton emailRadioButton;
+    private final JRadioButton instagramRadioButton;
+
     private final ContatoService service = new ContatoService(ContatoRepository.getInstance());
 
-    public AdicionarContatoGUICommand(JFrame parent, JTextField nome, JTextField sobrenome, Boolean ligacao,
-                                    Boolean chamadaVideo, String categoria, JTextField valorDaEntrada,
-                                    String redeSocial, JTextField telefone, JTextField aniversario) {
+    public AdicionarContatoGUICommand(JFrame parent, JTextField nome, JTextField sobrenome,
+            Boolean ligacao, Boolean chamadaVideo, String categoria, JTextField valorDaEntrada,
+            String redeSocial, JTextField telefone, JTextField aniversario,
+            JRadioButton favoritosRadioButton, JRadioButton trabalhoRadioButton, JRadioButton pessoalRadioButton,
+            JRadioButton whatsappRadioButton, JRadioButton emailRadioButton, JRadioButton instagramRadioButton) {
         this.parent = parent;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -151,6 +163,20 @@ public class AdicionarContatoGUICommand implements Command {
         this.redeSocial = redeSocial;
         this.telefone = telefone;
         this.aniversario = aniversario;
+        this.favoritosRadioButton = favoritosRadioButton;
+        this.trabalhoRadioButton = trabalhoRadioButton;
+        this.pessoalRadioButton = pessoalRadioButton;
+        this.whatsappRadioButton = whatsappRadioButton;
+        this.emailRadioButton = emailRadioButton;
+        this.instagramRadioButton = instagramRadioButton;
+    }
+
+    private boolean isCategoriaSelecionada() {
+        return favoritosRadioButton.isSelected() || trabalhoRadioButton.isSelected() || pessoalRadioButton.isSelected();
+    }
+
+    private boolean isRedeSocialSelecionada() {
+        return whatsappRadioButton.isSelected() || emailRadioButton.isSelected() || instagramRadioButton.isSelected();
     }
 
     @Override
@@ -165,6 +191,7 @@ public class AdicionarContatoGUICommand implements Command {
         String telefoneStr = telefone.getText();
         String aniversarioStr = aniversario.getText();
 
+        
     
 
         GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());
@@ -190,18 +217,19 @@ public class AdicionarContatoGUICommand implements Command {
         boolean valorDaEntradaIsValid = valorDaEntradaValidator == null ? true : valorDaEntradaValidator.validate(valorDaEntrada);
         // boolean redeSocialIsValid = redeSocialValidator.validate(redeSocial);
         
-        // Verificação adicional para campos em branco
-        if (nomeStr.isEmpty() || sobrenomeStr.isEmpty() || valorDaEntradaStr.isEmpty() || telefoneStr.isEmpty() || aniversarioStr.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar.");
-              // Retorna se algum campo estiver em branco
-        }
-        // Verificação para pelo menos um RadioButton de rede social e um RadioButton de categoria selecionados
-        // if (redeSocialGroup.getSelection() == null || (!radioCategoria1.isSelected() && !radioCategoria2.isSelected())) {
-        //     JOptionPane.showMessageDialog(nome.getParent(), "Selecione pelo menos um RadioButton de rede social e um RadioButton de categoria.");
-        //     return;  // Retorna se as condições não forem atendidas
+
+        // if (!isCategoriaSelecionada() || !isRedeSocialSelecionada()) {
+        //     JOptionPane.showMessageDialog(null, "Selecione pelo menos uma opção em Redes Sociais e Categoria.");
         // }
 
-        if (nomeIsValid && sobrenomeIsValid && valorDaEntradaIsValid  && telefoneIsValid && aniversarioIsValid) {
+
+        // Verificação adicional para campos em branco
+        if (nomeStr.isEmpty() || sobrenomeStr.isEmpty() ||  telefoneStr.isEmpty() || aniversarioStr.isEmpty()  ) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos antes de continuar. Selecione pelo menos uma opção em Redes Sociais e Categoria.");
+              // Retorna se algum campo estiver em branco
+        } 
+
+        if (nomeIsValid && sobrenomeIsValid  && telefoneIsValid && aniversarioIsValid) {
             JOptionPane.showMessageDialog(nome.getParent(), "Contato adicionado com sucesso.");
             service.criar(nomeStr, sobrenomeStr, ligacao, chamadaVideo, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
             parent.setVisible(false);
