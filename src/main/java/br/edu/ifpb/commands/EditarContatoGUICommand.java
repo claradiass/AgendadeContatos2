@@ -8,12 +8,7 @@ import main.java.br.edu.ifpb.validators.AniversarioValidator;
 import main.java.br.edu.ifpb.validators.EmailValidator;
 import main.java.br.edu.ifpb.validators.GUITextValidator;
 import main.java.br.edu.ifpb.validators.NonEmptyValidator;
-
 import javax.swing.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class EditarContatoGUICommand implements Command {
     private final JFrame parent;
@@ -55,16 +50,11 @@ public class EditarContatoGUICommand implements Command {
         String valorDaEntradaStr = valorDaEntrada.getText();
         String redeSocialStr = redeSocial;
         String categoriaStr = categoria;
-        
-        
 
         GUITextValidator nomeValidator = new GUITextValidator(new NonEmptyValidator());        
         GUITextValidator sobrenomeValidator = new GUITextValidator(new NonEmptyValidator());
-
         GUITextValidator telefoneValidator = new GUITextValidator(new TelefoneValidator(false));
         GUITextValidator aniversarioValidator = new GUITextValidator(new AniversarioValidator());
-        GUITextValidator redeSocialValidator = new GUITextValidator(new NonEmptyValidator());        
-        GUITextValidator categoriaValidator = new GUITextValidator(new NonEmptyValidator());
 
         GUITextValidator valorDaEntradaValidator = null;
         if ("Email".equalsIgnoreCase(redeSocialStr)) {
@@ -80,7 +70,6 @@ public class EditarContatoGUICommand implements Command {
         boolean sobrenomeIsValid = sobrenomeValidator.validate(sobrenome);
         boolean telefoneIsValid = telefoneValidator.validate(telefone);        
         boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
-        boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
 
         if (nomeIsValid && sobrenomeIsValid && telefoneIsValid && aniversarioIsValid ) {
             service.editar(nomeStr, sobrenomeStr, false, false, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
