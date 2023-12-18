@@ -1,6 +1,6 @@
 Nome,Sobrenome,Ligacao,ChamadaVideo,Categoria,ValorDaEntrada,RedeSocial,Telefone,Aniversario
 Ana,ANa,false,false,Pessoal,@testeeeeeeee,Instagram,(83)88888-8888,33/33/3333
-Teste1,ee,true,true,Favoritos,,WhatsApp,(11)11111-1111,09/09/0909
+Teste1,ee,false,false,Favoritos,teste@gmail.commm,Email,(11)11111-1111,09/09/0909
 dkdk,djdd,true,true,Pessoal,,WhatsApp,(87)86485-4657,34/34/3434
 AAAAAAAA,AADDDDDDD,true,false,Pessoal,udb,Email,(99)25443-3544,12/12/1212
 Suemilton,blabla,false,false,Trabalho,WhatsApp,Instagram,(87)86485-4444,34/34/3434
@@ -12,5 +12,6 @@ teste54,teste55,false,false,,,,(99)98575-3475,23/23/2323
 ANa,asddfd,false,true,Trabalho,@use,Instagram,(99)43648-1234,98/98/9876
 Edyarda,sjsiskis,true,true,Trabalho,,WhatsApp,(00)00000-0000,12/12/1212
 zebra,aaa,false,false,,,,(99)98765-8644,23/23/2323
-Ana,Spobre,false,false,,,,(99)98763-2334,34/34/3434
-fsgshdjdj,ooooooooooooooo,false,false,,,,(99)98765-9876,09/90/0909
+Ana,Spobre,false,false,,oii@gmail.com,Email,(99)98763-2334,34/34/3434
+fsgshdjdj,ooooooooooooooo,false,false,,@gmail,Instagram,(99)98765-9876,09/90/0909
+teste3456,teste56784,false,false,,,WhatsApp,(99)98764-9875,98/98/9898

@@ -68,23 +68,18 @@ public class MainWindow extends javax.swing.JFrame {
     public void updateContactList() {
         atualizarListaDeContatos();
     }
-    
 
     private void updateContactDetails(Contato contato) {
         if (contato != null) {
+            String ligacaoCor = contato.isLigacao() ? "green" : "red";
+            String chamadaVideoCor = contato.isChamadaVideo() ? "green" : "red";
             StringBuilder details = new StringBuilder("<html>");
             details.append("<b>Nome:</b> ").append(contato.getNome()).append("<br>");
             details.append("<b>Sobrenome:</b> ").append(contato.getSobrenome()).append("<br>");
             details.append("<b>Telefone:</b> ").append(contato.getTelefone()).append("<br>");
-            details.append("<b>Aniversário:</b> ").append(contato.getAniversario()).append("<br>");
-    
-            // Condição para determinar a cor do texto com base na ligação e chamada de vídeo
-            String ligacaoCor = contato.isLigacao() ? "green" : "red";
-            String chamadaVideoCor = contato.isChamadaVideo() ? "green" : "red";
-    
+            details.append("<b>Aniversário:</b> ").append(contato.getAniversario()).append("<br>");    
             details.append("<font color=\"").append(ligacaoCor).append("\"><b>Ligação</b></font><br>");
             details.append("<font color=\"").append(chamadaVideoCor).append("\"><b>Chamada de Vídeo</b></font><br>");
-    
             details.append("<b>Categoria:</b> ").append(contato.getCategoria().equals("") ? "Nenhuma" : contato.getCategoria()).append("<br>");
     
             if ("Instagram".equalsIgnoreCase(contato.getRedeSocial())) {
@@ -119,7 +114,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void excluirContatoSelecionado() {
         Contato selectedContato = list.getSelectedValue();
         if (selectedContato != null) {
-            // Excluir o contato
             int resposta = JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
             if(resposta == JOptionPane.YES_OPTION){
                 dataService.remover(selectedContato);
@@ -140,7 +134,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        // list = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -166,11 +159,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Adicione um diálogo de confirmação
-                // int option = JOptionPane.showConfirmDialog(MainWindow.this, "Tem certeza que deseja excluir o contato selecionado?", "Confirmação de Exclusão", JOptionPane.YES_NO_OPTION);
-                // if (option == JOptionPane.YES_OPTION) {
                     excluirContatoSelecionado();
-                // }
             }
         });
 
@@ -222,36 +211,23 @@ public class MainWindow extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 editarContatoSelecionado();
             }
-        });
-        
-        
+        });        
 
-        // jButton3.setBackground(new java.awt.Color(170, 213, 248));
-        // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
         jButton3.setBackground(new java.awt.Color(33, 50, 78));
-        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); 
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Adicionar contato");
         jButton3.setToolTipText("Adicione um novo contato");
-        // jButton3.setBorder(null);
-        // jButton3.setBorderPainted(false);
         jButton3.addActionListener(e -> {
             new ContatoWindow(this, null).show();
         });
 
-        // jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("whatsapp.png"))); // NOI18N
-        // jButton3.setBorder(null);
-        // jButton3.setBorderPainted(false);
-
-        jComboBox1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        jComboBox1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); 
         jComboBox1.setForeground(new java.awt.Color(33, 50, 78));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Instagram", "WhatsApp", "Email", "Pessoal", "Trabalho", "Favoritos" }));
         jComboBox1.setBackground(new java.awt.Color(170, 213, 248)); // Cor branca
         jComboBox1.setForeground(new java.awt.Color(33, 50, 78)); // Cor personalizada (RGB)
         jComboBox1.setFont(new java.awt.Font("Liberation Sans", java.awt.Font.BOLD, 15));
-        // Defina a borda do JComboBox
-        // jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(170, 213, 248), 3)); // Cor e largura da borda
-        // Defina a opacidade do JComboBox
         jComboBox1.setOpaque(true);
         jComboBox1.setToolTipText("Selecione um filtro");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {

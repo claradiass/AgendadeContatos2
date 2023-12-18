@@ -71,6 +71,8 @@ public class EditarContatoGUICommand implements Command {
             valorDaEntradaValidator = new GUITextValidator(new EmailValidator(false));
         } else if ("Instagram".equalsIgnoreCase(redeSocialStr)) {
             valorDaEntradaValidator = new GUITextValidator(new UserValidator(false));
+        } else {
+            valorDaEntradaValidator = new GUITextValidator(new UserValidator(false));
         }
 
 
@@ -80,7 +82,7 @@ public class EditarContatoGUICommand implements Command {
         boolean aniversarioIsValid = aniversarioValidator.validate(aniversario);
         boolean valorDaEntradaIsValid = valorDaEntradaValidator.validate(valorDaEntrada);
 
-        if (nomeIsValid && sobrenomeIsValid && telefoneIsValid && aniversarioIsValid && valorDaEntradaIsValid) {
+        if (nomeIsValid && sobrenomeIsValid && telefoneIsValid && aniversarioIsValid ) {
             service.editar(nomeStr, sobrenomeStr, false, false, categoriaStr, valorDaEntradaStr, redeSocialStr, telefoneStr, aniversarioStr);
             JOptionPane.showMessageDialog(nome.getParent(), "Contato editado com sucesso.");
             nome.setText("");
