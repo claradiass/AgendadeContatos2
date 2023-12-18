@@ -87,7 +87,7 @@ public class MainWindow extends javax.swing.JFrame {
             details.append("<font color=\"").append(ligacaoCor).append("\"><b>Ligação</b></font><br>");
             details.append("<font color=\"").append(chamadaVideoCor).append("\"><b>Chamada de Vídeo</b></font><br>");
     
-            details.append("<b>Categoria:</b> ").append(contato.getCategoria()).append("<br>");
+            details.append("<b>Categoria:</b> ").append(contato.getCategoria().equals("") ? "Nenhuma" : contato.getCategoria()).append("<br>");
     
             if ("Instagram".equalsIgnoreCase(contato.getRedeSocial())) {
                 details.append("<b>Usuário:</b> ").append(contato.getValorDaEntrada()).append("<br>");
@@ -96,7 +96,10 @@ public class MainWindow extends javax.swing.JFrame {
                 details.append("<b>Email:</b> ").append(contato.getValorDaEntrada()).append("<br>");
             }
     
-            details.append("<b>Rede Social:</b> ").append(contato.getRedeSocial()).append("<br>");
+            if (!contato.getRedeSocial().equals("")) {
+                details.append("<b>Rede Social:</b> ").append(contato.getRedeSocial()).append("<br>");
+            }
+            
             details.append("</html>");
             jLabel4.setText(details.toString());
     
