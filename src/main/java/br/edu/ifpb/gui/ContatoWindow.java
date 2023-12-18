@@ -1,12 +1,9 @@
 package main.java.br.edu.ifpb.gui;
 
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 
 import main.java.br.edu.ifpb.commands.AdicionarContatoGUICommand;
 import main.java.br.edu.ifpb.commands.CommandExecutor;
@@ -113,7 +110,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         if (contato != null) {
             setTitle("Editar Contato");
             jLabel1.setText("Editar Contato");
-            jButton1.setText("Editar"); // Altera o texto do botão conforme a ação desejada
+            jButton1.setText("Editar"); 
         } else {
             setTitle("Adicionar Contato");
             jLabel1.setText("Adicionar Contato");
@@ -240,67 +237,7 @@ public class ContatoWindow extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(170, 213, 248));
         jButton1.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(33, 50, 78));
-        // jButton1.addActionListener(new ActionListener() {
-        //             @Override
-        //             public void actionPerformed(ActionEvent e) {
-        //                 // Valores de teste para os campos específicos
-        //                 boolean ligacao = false;
-        //                 boolean chamadaVideo = false;
-                        
-        //                 String categoriaSelecionada = "";
-        //                 if (jRadioButton1.isSelected()) {
-        //                     categoriaSelecionada = "Favoritos";
-        //                 } else if (jRadioButton2.isSelected()) {
-        //                     categoriaSelecionada = "Trabalho";
-        //                 } else if (jRadioButton3.isSelected()) {
-        //                     categoriaSelecionada = "Pessoal";
-        //                 }
-
-        //                 String redeSocial = "";
-        //                 if (jRadioButton6.isSelected()) {
-        //                     redeSocial = "WhatsApp";
-        //                     ligacao = true;
-        //                     chamadaVideo = true;
-        //                 } else if (jRadioButton4.isSelected()) {
-        //                     redeSocial = "Email";
-        //                     ligacao = false;
-        //                     chamadaVideo = false;
-        //                 } else if (jRadioButton5.isSelected()) {
-        //                     redeSocial = "Instagram";
-        //                     ligacao = false;
-        //                     chamadaVideo = true;
-        //                 }
-                        
-        //                 if(contato == null){
-        //                 // Execute o comando para adicionar o contato
-        //                     commandExecutor.executeCommand(
-        //                         new AdicionarContatoGUICommand(
-        //                         jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
-        //                         jTextField7, redeSocial, jTextField4, jTextField6
-        //                         )
-        //                     );
-        //                     mainWindow.updateContactList();
-        //                     setVisible(false);
-        //                 }else if(contato != null){
-        //                     commandExecutor.executeCommand(
-        //                         new EditarContatoGUICommand(
-        //                         jTextField1, jTextField3, ligacao, chamadaVideo, categoriaSelecionada,
-        //                         jTextField7, redeSocial, jTextField4, jTextField6)
-        //                     );
-                            
-        //                     mainWindow.updateContactList();
-        //                     setVisible(false);
-        //                 }  
-                
-
-        // // Close the ContatoWindow
-        // //setVisible(false);
-        //             }
-
-                
-        //         });
-
-
+        
         jButton2.setText("Cancelar");
         jButton2.setBackground(new java.awt.Color(170, 213, 248));
         jButton2.setFont(new java.awt.Font("Noto Sans CJK HK", 1, 14)); // NOI18N
@@ -532,15 +469,7 @@ public class ContatoWindow extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-        // (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-         * look and feel.
-         * For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
